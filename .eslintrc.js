@@ -11,5 +11,8 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
-  }
+  },
+  plugins: [
+    "html"
+  ]
 }

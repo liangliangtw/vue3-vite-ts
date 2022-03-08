@@ -14,10 +14,10 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '第一页面' }
       },
       {
-        path: '/baseWatch',
-        name: 'BaseWatch',
-        component: () => import('@/views/BaseWatch.vue'),
-        meta: { title: '监听页面' }
+        path: '/baseWatchApi',
+        name: 'BaseWatchApi',
+        component: () => import('@/views/baseWatchApi.vue'),
+        meta: { title: '监听' }
       },
       {
         path: '/baseGetDom',
@@ -36,6 +36,36 @@ const routes: RouteRecordRaw[] = [
         name: 'BaseFather',
         component: () => import('@/views/baseFather/index.vue'),
         meta: { title: '测试父子组件' }
+      },
+      {
+        path: '/baseSlot',
+        name: 'baseSlot',
+        component: () => import('@/views/baseSlot/index.vue'),
+        meta: { title: '插槽' }
+      },
+      {
+        path: '/baseVBind',
+        name: 'BaseVBind',
+        component: () => import('@/views/baseVBind.vue'),
+        meta: { title: 'v-bind改变样式' }
+      },
+      {
+        path: '/baseRouter',
+        name: 'BaseRouter',
+        component: () => import('@/views/baseRouter.vue'),
+        meta: { title: '组件路由' }
+      },
+      {
+        path: '/baseTeleportApi',
+        name: 'BaseTeleportApi',
+        component: () => import('@/views/baseTeleportApi.vue'),
+        meta: { title: 'Teleport' }
+      },
+      {
+        path: '/baseSuspenseApi',
+        name: 'baseSuspenseApi',
+        component: () => import('@/views/baseSuspenseApi.vue'),
+        meta: { title: 'Suspense' }
       },
       {
         path: '/baseNestRouter',

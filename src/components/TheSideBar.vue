@@ -3,7 +3,7 @@
     <el-avatar :size="80" src="src/assets/avatar.png"></el-avatar>
   </div>
   <el-scrollbar wrap-class="scrollbar-wrapper">
-    <el-menu router>
+    <el-menu router :default-openeds="[menuList[0].path]">
       <template v-for="route in menuList" :key="route.path">
         <el-menu-item v-if="!route.children" :index="route.path">
           <el-icon>
