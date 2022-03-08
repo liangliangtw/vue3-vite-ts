@@ -63,8 +63,8 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/baseSuspenseApi',
-        name: 'baseSuspenseApi',
-        component: () => import('@/views/baseSuspenseApi.vue'),
+        name: 'BaseSuspenseApi',
+        component: () => import('@/views/baseSuspenseApi/index.vue'),
         meta: { title: 'Suspense' }
       },
       {
@@ -87,7 +87,8 @@ const routes: RouteRecordRaw[] = [
           }
         ]
       }
-    ]
+    ],
+    redirect:'/firstPage'
   }
 ]
 

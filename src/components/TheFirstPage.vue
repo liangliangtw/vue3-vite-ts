@@ -11,6 +11,12 @@
   <p>测试不用toRefs名字:{{ noTorefs.testName }}年龄:{{ noTorefs.testAge }}</p>
   <el-button type="primary" @click="changeName">直接修改string内容</el-button>
   <p>测试修改string内容:{{ testName }}</p>
+  <div>
+    <p style="display: flex; flex-direction: column; justify-content: center">
+      生命周期:
+      <img src="@/assets/lifeCycle.png" alt="" style="width: 500px" />
+    </p>
+  </div>
 </template>
 
 <script setup>
@@ -38,6 +44,24 @@ const noTorefs = reactive({
 const changeName = () => {
   testName.value = 'Tom'
 }
+/* 
+数组重新赋值方法
+1.遍历添加
+res.forEach(e => {
+     arr.push(e);
+  });
+2.多包裹一层
+  const state = reactive({
+  arr: []
+});
+state.arr = [1, 2, 3]
+3.使用ref
+const state = ref([])
+state.value = [1, 2, 3]
+4.push解构方式
+const arr = reactive([])
+arr.push(...[1, 2, 3])
+*/
 </script>
 
 <style scoped>
