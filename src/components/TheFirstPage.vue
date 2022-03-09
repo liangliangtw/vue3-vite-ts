@@ -17,10 +17,10 @@
       <img src="@/assets/lifeCycle.png" alt="" style="width: 500px" />
     </p>
   </div>
+  <el-button type="primary" @click="open">提示</el-button>
 </template>
 
 <script setup>
-import { computed, reactive, ref, toRefs } from 'vue'
 let testName = ref('良田伍')
 const personObj = reactive({
   name: 'testName',
@@ -43,6 +43,9 @@ const noTorefs = reactive({
 })
 const changeName = () => {
   testName.value = 'Tom'
+}
+const open = () => {
+  ElMessage('this is a message.')
 }
 /* 
 数组重新赋值方法

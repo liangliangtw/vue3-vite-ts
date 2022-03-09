@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
+import { reactive, ref, toRefs, watch } from 'vue'
 import {
   useRoute,
   useRouter,
@@ -36,5 +36,15 @@ onBeforeRouteUpdate((to, from, next) => {
     next()
   }
 })
+// 监听路由变化
+// watch(
+//   () => router.currentRoute.value.path,
+//   (newVal, oldVal) => {
+//     console.log(newVal.value.path, '新的路由')
+//     // console.log(oldVal.value.path, '旧的路由')
+//   },
+//   { immediate: true }
+// )
+// console.log(route.query.type); //获取路由参数
 </script>
 <style scoped></style>

@@ -26,9 +26,9 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '获取dom元素' }
       },
       {
-        path: '/basePinia',
-        name: 'BasePinia',
-        component: () => import('@/views/basePinia.vue'),
+        path: '/basePiniaPage',
+        name: 'BasePiniaPage',
+        component: () => import('@/views/basePiniaPage.vue'),
         meta: { title: 'Pinia' }
       },
       {

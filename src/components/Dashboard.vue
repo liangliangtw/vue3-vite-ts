@@ -2,7 +2,8 @@
   <el-container class="layout-container-demo">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-scrollbar>
-        <side-bar></side-bar>
+        <the-side-bar></the-side-bar>
+        <!-- <TheSideBar></TheSideBar> -->
       </el-scrollbar>
     </el-aside>
     <el-container>
@@ -34,17 +35,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-// import { Message, Menu as IconMenu, Setting } from '@element-plus/icons-vue'
 import homeNav from '@/components/TheHomeNav.vue'
-import sideBar from '@/components/TheSideBar.vue'
+// import sideBar from '@/components/TheSideBar.vue'
+const router = useRouter()
+const route = useRoute()
 
-const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles'
-}
-const tableData = ref(Array(20).fill(item))
+let menuList = reactive([])
+// menuList = router.options.routes
+
+let defaultActive = ref()
 </script>
 
 <style scoped>

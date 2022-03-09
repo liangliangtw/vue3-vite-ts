@@ -3,7 +3,11 @@
     <el-avatar :size="80" src="src/assets/avatar.png"></el-avatar>
   </div>
   <el-scrollbar wrap-class="scrollbar-wrapper">
-    <el-menu router :default-openeds="[menuList[0].path]">
+    <el-menu
+      router
+      :default-openeds="[menuList[0].path]"
+      :default-active="defaultActive"
+    >
       <template v-for="route in menuList" :key="route.path">
         <el-menu-item v-if="!route.children" :index="route.path">
           <el-icon>
@@ -45,16 +49,27 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, toRefs } from 'vue'
+// import { onMounted, reactive, ref, toRefs, watch } from 'vue'
 
-import { useRouter, useRoute } from 'vue-router'
+// import { useRouter, useRoute } from 'vue-router'
 // 获取路由器实例
 const router = useRouter()
 const route = useRoute()
 
 let menuList = reactive([])
+let defaultActive = ref()
 menuList = router.options.routes
-console.log(menuList, 'menuList')
+console.log(router, 'router')
+
+watch(
+  () => router.currentRoute.value.path,
+  (newVal, oldVal) => {
+    defaultActive.value = newVal
+    // console.log(newVal, '新的路由')
+    // console.log(oldVal, '旧的路由')
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped>

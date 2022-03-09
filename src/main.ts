@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import store from './store'
+// import store from './store'
 import router from './router'
 import { createPinia } from "pinia"
 import ElementPlus from 'element-plus'
@@ -15,8 +15,8 @@ for (let iconName in ELIcons) {
 
 
 // app.use(ElementPlus).mount('#app')
-app.use(store)
-    .use(router)
+// app.use(store)
+app.use(router)
     .use(ElementPlus)
     .use(createPinia())
     .mount('#app')
