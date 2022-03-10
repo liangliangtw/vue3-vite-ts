@@ -2,9 +2,11 @@
   <h1>这是第一个测试界面</h1>
   <p>这是年龄{{ age }}</p>
   <div>
-    {{ name }}
+    {{ testTestName }}
     {{ phone }}
     {{ sex }}
+    {{ testObj.uu }}
+    {{ noValue }}
   </div>
   <el-button type="primary" @click="add">加一</el-button>
   <p>双倍{{ doubleCount }}</p>
@@ -21,18 +23,27 @@
 </template>
 
 <script setup>
+let noValue = $ref(1)
 let testName = ref('良田伍')
+const changeName = () => {
+  testName.value = 'Tom'
+}
 const personObj = reactive({
-  name: 'testName',
+  testTestName: 'testName',
   age: 18,
   phone: 13486395621,
-  sex: '不男不女'
+  sex: '不男不女',
+  testObj: {
+    uu: 'yy'
+  }
 })
-personObj.name = 'haha'
+// personObj.name = 'haha'
 const add = () => {
   personObj.age++
 }
-const { name, phone, sex, age } = toRefs(personObj)
+
+let { testTestName, phone, sex, age, testObj } = toRefs(personObj)
+// 解构需要.value拿值
 const count = ref(1)
 const doubleCount = computed(() => {
   return count.value * 2
@@ -41,12 +52,16 @@ const noTorefs = reactive({
   testName: 'LL',
   testAge: 55
 })
-const changeName = () => {
-  testName.value = 'Tom'
-}
+
 const open = () => {
   ElMessage('this is a message.')
 }
+setTimeout(() => {
+  // console.log(testObj.value.uu, 'testObj')
+  // testObj.value.uu = '过了2秒之后'
+  personObj.testObj.uu = '过了2秒之后'
+  noValue = 5
+}, 2000)
 /* 
 数组重新赋值方法
 1.遍历添加

@@ -25,7 +25,9 @@ const { resolve } = require('path')
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      reactivityTransform: true
+    }),
     AutoImport({
       //引入element plus自动api支持
       resolvers: [
