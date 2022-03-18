@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { json } from 'stream/consumers'
+
 
 export const useUserStore = defineStore({
   id: 'user', // id必填，且需要唯一
@@ -12,7 +14,9 @@ export const useUserStore = defineStore({
     sex: '不男不女',
     phone: <number | null>null,
     date: 19950218,
-    computedVal: '哈喽'
+    computedVal: '哈喽',
+    isAddRouter: true,
+
   }),
   actions: {
     updateUserInfo(newUserInfo: any, count: number) {
@@ -32,6 +36,22 @@ export const useUserStore = defineStore({
     },
     getUserPhone() {
       return 18024168369
+    },
+
+    setAsyncRoutes(router: any) {
+      // let { userName }: any = userInfo
+      let userName = 'test'
+      if (userName == 'admin') {
+        router.addRoute('404', {
+          path: '/404',
+          name: '404',
+          component: () => import('@/views/base404Page.vue'),
+          meta: { title: '404' }
+        })
+      } else {
+        console.log('不具备权限');
+      }
+      this.isAddRouter = false
     }
   },
   // getter 第一个参数是 state，是当前的状态，也可以使用 this 获取状态

@@ -20,6 +20,8 @@
     </p>
   </div>
   <el-button type="primary" @click="open">提示</el-button>
+  <el-button type="primary" @click="onTestToRefs">测试toRefs</el-button>
+  <!-- {{ test1 }} -->
 </template>
 
 <script setup>
@@ -35,14 +37,15 @@ const personObj = reactive({
   sex: '不男不女',
   testObj: {
     uu: 'yy'
-  }
+  },
+  testToRefsObj: { test1: '测试toRefs' }
 })
 // personObj.name = 'haha'
 const add = () => {
   personObj.age++
 }
 
-let { testTestName, phone, sex, age, testObj } = toRefs(personObj)
+// 解构后拿值一定要.value拿
 // 解构需要.value拿值
 const count = ref(1)
 const doubleCount = computed(() => {
@@ -62,7 +65,10 @@ setTimeout(() => {
   personObj.testObj.uu = '过了2秒之后'
   noValue = 5
 }, 2000)
-/* 
+
+let { testTestName, phone, sex, age, testObj } = toRefs(personObj)
+
+/*
 数组重新赋值方法
 1.遍历添加
 res.forEach(e => {
@@ -80,6 +86,23 @@ state.value = [1, 2, 3]
 const arr = reactive([])
 arr.push(...[1, 2, 3])
 */
+
+// 打印数组直接获取响应式的值\
+// toRaw(ftyArray) 第一种获取target值的方式，通过vue中的响应式对象可使用toRaw()方法获取原始对象
+// JSON.parse(JSON.stringify(ftyArray)) 通过json序列化之后可获取值
+
+// toRefs解构重新赋值无法更新
+let toRefsObj = {
+  test1: { age: '哈哈' }
+}
+personObj.testToRefsObj = {
+  test1: { cc: 'cc' }
+}
+
+const onTestToRefs = () => {
+  personObj.testToRefsObj = { ...toRefsObj }
+}
+let { test1 } = toRefs(personObj.testToRefsObj) // 无法结构多层
 </script>
 
 <style scoped>

@@ -27,7 +27,7 @@ import { useUserStore } from '@/store/user.ts'
 import { storeToRefs } from 'pinia'
 const store = useUserStore()
 // state 也可以使用解构，但使用解构会使其失去响应式，这时候可以用 pinia 的 storeToRefs。
-const { date } = storeToRefs(store)
+const { date } = storeToRefs(store) //  解构后拿值一定要.value拿
 // computed获取
 const computedVal = computed(() => store.computedVal)
 const onActionsClick = () => {

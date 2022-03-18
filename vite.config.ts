@@ -56,12 +56,22 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 9533,
     open: true,
-    https: false
+    https: false,
+    // proxy: { // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
+    //   // 正则表达式写法
+    //   '/api': {
+    //     target: 'http://192.168.1.234:8080/byod_war', // 后端服务实际地址
+    //     changeOrigin: true, //开启代理
+    //     rewrite: (path) => path.replace(/^\/api/, '') // 路径重写
+    //   }
+    // }
+
   },
   resolve: {
     alias: {
       // '@': path.resolve(__dirname, 'src'),
       '@': resolve(__dirname, 'src')
-    }
+    },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   }
 })
