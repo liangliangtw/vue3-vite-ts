@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "babel-eslint": "^10.1.0",
     "element-plus": "^2.0.4",
     "lodash": "^4.17.21",
+    "path-to-regexp": "^6.2.0",
     "pinia": "^2.0.0-rc.10",
     "vue": "^3.2.25",
     "vue-router": "4"

@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
 import { json } from 'stream/consumers'
+import { layoutMap2 } from '@/router/asyncRouter2'
+import { routes, layoutMap } from '@/router/asyncRouter'
+import { tr } from 'element-plus/lib/locale'
+import { hasPermission, filterAsyncRouter } from "@/untils/tool";
 
 
 export const useUserStore = defineStore({
@@ -16,7 +20,7 @@ export const useUserStore = defineStore({
     date: 19950218,
     computedVal: '哈喽',
     isAddRouter: true,
-
+    menuList: []
   }),
   actions: {
     updateUserInfo(newUserInfo: any, count: number) {
@@ -38,20 +42,47 @@ export const useUserStore = defineStore({
       return 18024168369
     },
 
-    setAsyncRoutes(router: any) {
-      // let { userName }: any = userInfo
-      let userName = 'test'
-      if (userName == 'admin') {
-        router.addRoute('404', {
-          path: '/404',
-          name: '404',
-          component: () => import('@/views/base404Page.vue'),
-          meta: { title: '404' }
+    setAsyncRoutes(userName: any, router: any) {
+      // 模拟请求数据
+      if (this.isAddRouter) {
+        let routerList
+        if (userName == 'admin') {
+          routerList = layoutMap2
+        } else {
+          routerList = layoutMap
+        }
+        routerList.forEach(item => {
+          // let url = `@/components/${item.componentName}.vue`
+          // router.addRoute('Dashboard', {
+          //   path: item.path,
+          //   meta: { name: item.name, isAsync: true, roles: item.roles },
+          //   name: item.name,
+          //   component: () => import(url)
+          // })
+          // router.addRoute('Dashboard', item)
+          router.addRoute('Dashboard', item)   // 完整列表不显示嵌套关系
         })
-      } else {
-        console.log('不具备权限');
+        console.log(router.getRoutes());
+
+        const currentRoute = router.currentRoute
+        console.log(currentRoute, 'currentRoute');
+
+        // console.log(currentRoute.value.matched)
+        // console.log(routerList);
+        // router.addRoute('Dashboard', routerList)
+
+
       }
-      this.isAddRouter = false
+
+      // this.isAddRouter = false
+    },
+    filterRouter() {
+      let userRoles = sessionStorage.getItem('userRoles')
+      if (!userRoles) {
+        this.menuList = filterAsyncRouter(routes, userRoles)
+        sessionStorage.setItem('userRoles', 'test')
+      }
+      console.log(this.menuList, 'this.menuList');
     }
   },
   // getter 第一个参数是 state，是当前的状态，也可以使用 this 获取状态

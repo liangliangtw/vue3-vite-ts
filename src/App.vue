@@ -20,9 +20,16 @@
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100%;
-  color: #2c3e50;
+
+  /* color: #2c3e50; */
   /* margin-top: 60px; */
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* .fade-enter-active,
 .fade-leave-active {
   transition: opacity 1s ease;

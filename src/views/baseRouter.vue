@@ -4,6 +4,7 @@
   <p>路由元对象:{{ route }}</p>
   <el-button type="primary" @click="onPush">跳转</el-button>
   <p>名字:{{ name }}</p>
+  <el-button type="primary" @click="onAddRouter">动态添加路由</el-button>
 </template>
 
 <script setup>
@@ -36,6 +37,7 @@ onBeforeRouteUpdate((to, from, next) => {
     next()
   }
 })
+const onAddRouter = () => {}
 // 监听路由变化
 // watch(
 //   () => router.currentRoute.value.path,

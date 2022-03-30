@@ -22,6 +22,7 @@
   <el-button type="primary" @click="open">提示</el-button>
   <el-button type="primary" @click="onTestToRefs">测试toRefs</el-button>
   <!-- {{ test1 }} -->
+  <el-button plain @click="open1"> Success </el-button>
 </template>
 
 <script setup>
@@ -103,6 +104,15 @@ const onTestToRefs = () => {
   personObj.testToRefsObj = { ...toRefsObj }
 }
 let { test1 } = toRefs(personObj.testToRefsObj) // 无法结构多层
+
+const open1 = () => {
+  ElNotification({
+    title: 'Success',
+    message: 'This is a success message',
+    duration: 0,
+    type: 'success'
+  })
+}
 </script>
 
 <style scoped>

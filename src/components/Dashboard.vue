@@ -1,13 +1,28 @@
 <template>
   <el-container class="layout-container-demo">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-scrollbar>
-        <the-side-bar></the-side-bar>
-        <!-- <TheSideBar></TheSideBar> -->
-      </el-scrollbar>
-    </el-aside>
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+    <el-scrollbar class="layout-container-demo-sideBar">
+      <the-side-bar :isCollapse="isCollapse"></the-side-bar>
+    </el-scrollbar>
+
+    <el-main class="mainBox">
+      <el-header>
+        <div class="asideCollapse">
+          <el-icon
+            v-if="isCollapse"
+            @click="isCollapse = !isCollapse"
+            class="collapseIcon"
+            :size="25"
+            ><expand
+          /></el-icon>
+          <el-icon
+            v-else
+            @click="isCollapse = !isCollapse"
+            class="collapseIcon"
+            :size="25"
+            ><fold
+          /></el-icon>
+        </div>
+        <Breadcrumb></Breadcrumb>
         <div class="toolbar">
           <el-dropdown>
             <el-icon style="margin-right: 8px; margin-top: 1px"
@@ -24,19 +39,15 @@
           <span>Ltw</span>
         </div>
       </el-header>
-
-      <el-main>
-        <el-scrollbar>
-          <router-view />
-        </el-scrollbar>
-      </el-main>
-    </el-container>
+      <router-view />
+    </el-main>
   </el-container>
 </template>
 
 <script lang="ts" setup>
-import homeNav from '@/components/TheHomeNav.vue'
+// import homeNav from '@/components/TheHomeNav.vue'
 // import sideBar from '@/components/TheSideBar.vue'
+import Breadcrumb from '@/components/TheBreadcrumb.vue'
 const router = useRouter()
 const route = useRoute()
 
@@ -44,19 +55,26 @@ let menuList = reactive([])
 // menuList = router.options.routes
 
 let defaultActive = ref()
+let isCollapse = ref(false)
 </script>
 
 <style scoped>
 .layout-container-demo {
   height: 100%;
   width: 100%;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
 }
-.layout-container-demo .el-header {
+.layout-container-demo-sideBar {
+  flex-shrink: 0;
+}
+.layout-container-demo .mainBox .el-header {
+  display: flex;
   position: relative;
-  background-color: #b3c0d1;
+  background-color: #fff;
   color: var(--el-text-color-primary);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
+
 .layout-container-demo .el-aside {
   width: 240px;
   color: var(--el-text-color-primary);
@@ -77,5 +95,12 @@ let defaultActive = ref()
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+.asideCollapse {
+  display: flex;
+  align-items: center;
+}
+.collapseIcon {
+  font-size: 40;
 }
 </style>

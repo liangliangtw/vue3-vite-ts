@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Dashboard: typeof import('./../components/Dashboard.vue')['default']
+    TheBreadcrumb: typeof import('./../components/TheBreadcrumb.vue')['default']
     TheCreateFoodListCard: typeof import('./../components/TheCreateFoodListCard.vue')['default']
     TheCreateFtyCard: typeof import('./../components/TheCreateFtyCard.vue')['default']
     TheCreateMlistCard: typeof import('./../components/TheCreateMlistCard.vue')['default']
