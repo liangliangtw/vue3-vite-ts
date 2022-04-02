@@ -15,9 +15,7 @@
   <el-button @click="onResetClick">重置state</el-button>
   <el-button @click="onShowPhone">actions之间互相调用</el-button>
   <!--  获取 getter -->
-  <p>
-    获取getter1:{{ store.doubleCount }} | 获取getter2:{{ store.tripleCount }}
-  </p>
+  <p>获取getter1:{{ store.doubleCount }} | 获取getter2:{{ store.tripleCount }}</p>
   <p>computed获取:{{ computedVal }}</p>
 </template>
 
@@ -31,26 +29,26 @@ const { date } = storeToRefs(store) //  解构后拿值一定要.value拿
 // computed获取
 const computedVal = computed(() => store.computedVal)
 const onActionsClick = () => {
-  let userInfo = reactive({
+  const userInfo = reactive({
     name: 'Actions修改后名字',
-    age: 18
+    age: 18,
   })
-  let count = ref(3)
+  const count = ref(3)
   // 通过 mutations 定义的方法修改 state
   store.updateUserInfo(userInfo, count)
 }
 const onStoreClick = () => {
-  let userInfo = reactive({
+  const userInfo = reactive({
     name: 'Store修改后名字',
-    age: 189
+    age: 189,
   })
   // 通过 store 直接修改
   store.userInfo = userInfo
 }
 const onPatchClick = () => {
-  let userInfo = reactive({
+  const userInfo = reactive({
     name: '$patch修改后名字',
-    age: 89
+    age: 89,
   })
   // 使用 $patch 修改多个值
   store.$patch((state) => {
@@ -60,12 +58,12 @@ const onPatchClick = () => {
   })
 }
 const onReplaceClick = () => {
-  let userInfo = reactive({
+  const userInfo = reactive({
     name: '替换整个state',
-    age: '没有'
+    age: '没有',
   })
   store.$state = {
-    userInfo
+    userInfo,
   }
 }
 const onResetClick = () => {

@@ -40,29 +40,29 @@
 </template>
 
 <script setup>
-let arrayList = reactive([
-  { label: '1', isFinish: false },
-  { label: '2', isFinish: false },
-  { label: '3', isFinish: false },
-  { label: '4', isFinish: false }
+const arrayList = reactive([
+  { label: "1", isFinish: false },
+  { label: "2", isFinish: false },
+  { label: "3", isFinish: false },
+  { label: "4", isFinish: false },
 ])
-let finishList = computed(() => {
+const finishList = computed(() => {
   return arrayList.filter((item) => {
     return item.isFinish
-  })
+  });
 })
 const changeState = (item) => {
-  item.isFinish = !item.isFinish
+  item.isFinish = !item.isFinish;
 }
-const addInput = ref('')
+const addInput = ref("");
 const addItem = () => {
   if (addInput.value) {
-    arrayList.push({ label: addInput.value, isFinish: false })
-    addInput.value = ''
+    arrayList.push({ label: addInput.value, isFinish: false });
+    addInput.value = "";
   } else {
-    ElMessage.error('没值叫我加啥?')
+    ElMessage.error("没值叫我加啥?");
   }
-}
+};
 </script>
 <style scoped>
 .finishTxtStyle {

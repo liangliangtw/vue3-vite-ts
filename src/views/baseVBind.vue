@@ -3,14 +3,14 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
+import { reactive, ref, toRefs } from "vue";
 const state = reactive({
-  color: 'pink'
-})
+  color: "pink",
+});
 </script>
 <style scoped>
 h1 {
   /* 使用v-bind绑定state中的变量 */
-  color: v-bind('state.color');
+  color: v-bind("state.color");
 }
 </style>

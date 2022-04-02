@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "allowSyntheticDefaultImports":true,
+    "allowSyntheticDefaultImports": true,
     // "noImplicitAny": false, // noImplicitAny如果我们没有一些值设置明确类型，编译器会默认认为这个值为any类型，如果将noImplicitAny设为true,则如果没有设置明确的类型会报错，默认值为false
     //原有代码
     "baseUrl": ".",
@@ -18,8 +18,15 @@
       "@/*": ["src/*"] // 相对位置需要配置baseUrl才能识别，否则会报错
     }
   },
-  
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/autoImports/**/*.ts","**/*.ts","src/**/*.js",],
-  "references": [{ "path": "./tsconfig.node.json" }],
 
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/autoImports/**/*.ts",
+    "**/*.ts",
+    "src/**/*.js"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

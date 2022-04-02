@@ -1,5 +1,4 @@
 module.exports = {
-  printWidth: 100, //一行的字符数，如果超过会进行换行，默认为80
   tabWidth: 2,
   jsxSingleQuote: true,
   jsxBracketSameLine: true,
@@ -8,11 +7,12 @@ module.exports = {
   semi: false,
   overrides: [
     {
-      files: "*.json",
+      files: '*.json',
       options: {
         printWidth: 200,
       },
     },
   ],
-  arrowParens: "always",
-};
+  arrowParens: 'always',
+  endOfLine: 'auto', //避免报错delete (cr)的错
+}

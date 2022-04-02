@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
+import { reactive, ref, toRefs } from "vue";
 const state = reactive({
-  name: '良田伍',
-  age: 180
-})
+  name: "良田伍",
+  age: 180,
+});
 </script>
 <style scoped></style>

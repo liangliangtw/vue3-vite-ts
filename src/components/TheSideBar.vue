@@ -58,23 +58,23 @@
 // import { onMounted, reactive, ref, toRefs, watch } from 'vue'
 
 // import { useRouter, useRoute } from 'vue-router'
-import { useUserStore } from '@/store/user.ts'
-import { storeToRefs } from 'pinia'
+import { useUserStore } from "@/store/user.ts";
+import { storeToRefs } from "pinia";
 const prosData = defineProps({
   isCollapse: {
     type: Boolean, // 注意是type: String,不是type: 'string',
-    default: false
-  }
-})
-const store = useUserStore()
+    default: false,
+  },
+});
+const store = useUserStore();
 // 获取路由器实例
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
-let menuList = reactive([])
+let menuList = reactive([]);
 // let routerList = router.getRoutes()
-let defaultActive = ref()
-menuList = router.options.routes
+const defaultActive = ref()
+menuList = router.options.routes;
 
 // console.log(router.getRoutes(), 'router.getRoutes()')
 // menuList = routerList.filter((route) => {
@@ -92,12 +92,12 @@ menuList = router.options.routes
 watch(
   () => router.currentRoute.value.path,
   (newVal, oldVal) => {
-    defaultActive.value = newVal
+    defaultActive.value = newVal;
     // console.log(newVal, '新的路由')
     // console.log(oldVal, '旧的路由')
   },
   { immediate: true }
-)
+);
 </script>
 
 <style scoped>

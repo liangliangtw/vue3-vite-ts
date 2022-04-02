@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
-import childSlot from './childSlot.vue'
+import { reactive, ref, toRefs } from "vue";
+import childSlot from "./childSlot.vue";
 </script>
 <style scoped></style>

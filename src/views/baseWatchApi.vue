@@ -4,19 +4,19 @@
 </template>
 
 <script setup>
-import { imageProps } from 'element-plus'
-import { reactive, ref, toRefs, watch } from 'vue'
-let state = ref(1)
-let stateObj = reactive({ name: '良田伍' })
-let testObj = reactive({ name: '良田伍' })
-const numbers = reactive([1, 2, 3, 4])
+import { imageProps } from "element-plus";
+import { reactive, ref, toRefs, watch } from "vue";
+const state = ref(1)
+const stateObj = reactive({ name: "良田伍" })
+const testObj = reactive({ name: "良田伍" })
+const numbers = reactive([1, 2, 3, 4]);
 const changeState = () => {
-  console.log('00')
-  state.value = state.value * 2
-  stateObj.name = '哈哈'
-  testObj.name = '哈哈你好'
-  numbers.push(5)
-  console.log(state.value, 'state')
+  console.log("00");
+  state.value = state.value * 2;
+  stateObj.name = "哈哈";
+  testObj.name = "哈哈你好";
+  numbers.push(5);
+  console.log(state.value, "state");
 }
 // // 侦听一个 getter
 // watch(
@@ -46,9 +46,9 @@ const changeState = () => {
 watch(
   [state, () => testObj.name, () => stateObj.name, () => [...numbers]],
   (newValues, prevValues) => {
-    console.log(newValues, prevValues)
+    console.log(newValues, prevValues);
   },
   { deep: true }
-)
+);
 </script>
 <style scoped></style>

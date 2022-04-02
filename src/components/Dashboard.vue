@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-container-demo">
     <el-scrollbar class="layout-container-demo-sideBar">
-      <the-side-bar :isCollapse="isCollapse"></the-side-bar>
+      <the-side-bar :is-collapse="isCollapse"></the-side-bar>
     </el-scrollbar>
 
     <el-main class="mainBox">
@@ -9,25 +9,27 @@
         <div class="asideCollapse">
           <el-icon
             v-if="isCollapse"
-            @click="isCollapse = !isCollapse"
             class="collapseIcon"
             :size="25"
-            ><expand
-          /></el-icon>
+            @click="isCollapse = !isCollapse"
+          >
+            <expand />
+          </el-icon>
           <el-icon
             v-else
-            @click="isCollapse = !isCollapse"
             class="collapseIcon"
             :size="25"
-            ><fold
-          /></el-icon>
+            @click="isCollapse = !isCollapse"
+          >
+            <fold />
+          </el-icon>
         </div>
         <Breadcrumb></Breadcrumb>
         <div class="toolbar">
           <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px"
-              ><setting
-            /></el-icon>
+            <el-icon style="margin-right: 8px; margin-top: 1px">
+              <setting />
+            </el-icon>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>View</el-dropdown-item>
@@ -39,6 +41,7 @@
           <span>Ltw</span>
         </div>
       </el-header>
+      <v-tags></v-tags>
       <router-view />
     </el-main>
   </el-container>
@@ -47,15 +50,21 @@
 <script lang="ts" setup>
 // import homeNav from '@/components/TheHomeNav.vue'
 // import sideBar from '@/components/TheSideBar.vue'
-import Breadcrumb from '@/components/TheBreadcrumb.vue'
-const router = useRouter()
-const route = useRoute()
+import Breadcrumb from "@/components/TheBreadcrumb.vue";
+import vTags from "@/components/TheTagsView.vue";
+import { useUserStore } from "@/store/user";
+const store = useUserStore();
+const router = useRouter();
+const route = useRoute();
 
-let menuList = reactive([])
+const menuList = reactive([])
 // menuList = router.options.routes
 
-let defaultActive = ref()
-let isCollapse = ref(false)
+const defaultActive = ref()
+const isCollapse = ref(false)
+const showTagsView = computed(() => {
+  return store.showTagsView;
+})
 </script>
 
 <style scoped>

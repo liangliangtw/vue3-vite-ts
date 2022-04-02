@@ -3,12 +3,12 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
+import { reactive, ref, toRefs } from "vue";
 defineProps({
   foodItem: {
     type: Object,
-    default: {}
-  }
-})
+    default: {},
+  },
+});
 </script>
 <style scoped></style>

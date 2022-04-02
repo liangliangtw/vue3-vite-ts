@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, toRefs } from 'vue'
-import asyncComponent from './request.vue'
+import { onMounted, reactive, ref, toRefs } from "vue";
+import asyncComponent from "./request.vue";
 </script>
 <style scoped>
 .img {

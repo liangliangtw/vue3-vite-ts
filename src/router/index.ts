@@ -1,10 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import { routes, layoutMap } from './asyncRouter'
-import { useUserStore } from '@/store/user'
-import { storeToRefs } from 'pinia'
+import { routes, layoutMap } from "./asyncRouter";
+import { useUserStore } from "@/store/user";
+import { storeToRefs } from "pinia";
 import { filterAsyncRouter } from "@/untils/tool";
-
 
 // const routes = [
 //   {
@@ -36,7 +35,7 @@ import { filterAsyncRouter } from "@/untils/tool";
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 // console.log(router.getRoutes(), 'test')
 // router.addRoute({ name: 'admin', path: '/admin', component: () => import('@/views/basePiniaPage.vue') })
 // router.addRoute('admin', { path: 'settings', component: () => import('@/views/baseFather/index.vue') })
@@ -49,7 +48,6 @@ const router = createRouter({
 //   component: () => import('@/views/baseWatchApi.vue'),
 //   meta: { title: '监听' }
 // })
-
 
 // router.beforeEach((to, from, next) => {
 //   // console.log(router.getRoutes());
@@ -80,4 +78,4 @@ const router = createRouter({
 
 // })
 
-export default router
+export default router;

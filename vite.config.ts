@@ -26,22 +26,18 @@ const { resolve } = require('path')
 export default defineConfig({
   plugins: [
     vue({
-      reactivityTransform: true
+      reactivityTransform: true,
     }),
     AutoImport({
       //引入element plus自动api支持
-      resolvers: [
-        ElementPlusResolver(),
-      ],
-      imports: [
-        'vue',
-        'vue-router',
-        'vue-i18n',
-        '@vueuse/head',
-        '@vueuse/core'
-      ],
+      resolvers: [ElementPlusResolver()],
+      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
       // 可以选择auto-import.d.ts生成的位置，使用ts建议设置为'src/auto-import.d.ts'
       dts: 'src/autoImports/auto-imports.d.ts',
+      // 解决eslint报错问题
+      eslintrc: {
+        enabled: true,
+      },
     }),
     Components({
       //自动加载的组件目录，默认值为 ['src/components']
@@ -50,8 +46,15 @@ export default defineConfig({
       directoryAsNamespace: true,
       //指定类型声明文件，为true时在项目根目录创建
       dts: 'src/autoImports/components.d.ts',
-    })
+    }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/assets/style/main.scss";',
+      },
+    },
+  },
   server: {
     host: '0.0.0.0',
     port: 9533,
@@ -65,13 +68,12 @@ export default defineConfig({
     //     rewrite: (path) => path.replace(/^\/api/, '') // 路径重写
     //   }
     // }
-
   },
   resolve: {
     alias: {
       // '@': path.resolve(__dirname, 'src'),
-      '@': resolve(__dirname, 'src')
+      '@': resolve(__dirname, 'src'),
     },
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
-  }
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
+  },
 })
