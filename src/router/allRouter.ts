@@ -1,4 +1,4 @@
-const layoutMap = [
+const allLayoutMap = [
   {
     path: '/dashboard/baseWatchApi',
     name: 'BaseWatchApi',
@@ -66,6 +66,12 @@ const layoutMap = [
   //   meta: { title: '类型卡片' },
   // },
   // {
+  //   path: '/dashboard/vueUse',
+  //   name: 'VueUse',
+  //   component: () => import('@/views/baseVueUsePage.vue'),
+  //   meta: { title: 'vueUse' },
+  // },
+  // {
   //   path: '/dashboard/baseNestRouter',
   //   name: 'BaseNestRouter',
   //   component: () => import('@/views/baseNestRouter/index.vue'),
@@ -86,21 +92,5 @@ const layoutMap = [
   //   ],
   // },
 ]
-// const asyncRouter = [
-//   {
-//     path: '/dashboard',
-//     name: 'Dashboard',
-//     redirect: '/firstPage',
-//     meta: {
-//       title: '首页',
-//       icon: 'menu',
-//       breadcrumb: true,
-//       affix: true,
-//       noCache: true,
-//     },
-//     component: () => import('@/components/Dashboard.vue'),
-//     children: [...layoutMap],
-//   },
-// ]
-// asyncRouter
-export { layoutMap }
+
+export { allLayoutMap }

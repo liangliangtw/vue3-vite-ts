@@ -18,10 +18,7 @@
     </div>
     <div class="main-box">
       <template v-if="mainItem.allTypeArry && mainItem.allTypeArry.length != 0">
-        <template
-          v-for="(typeItem, clickIndex) in mainItem.allTypeArry"
-          :key="clickIndex"
-        >
+        <template v-for="(typeItem, clickIndex) in mainItem.allTypeArry" :key="clickIndex">
           <fty-card
             v-if="typeItem.typeName == 'ftyItem'"
             :type-item="typeItem"
@@ -55,49 +52,49 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs, isReactive } from "vue";
-import axios from "axios";
+import { reactive, ref, toRefs, isReactive } from 'vue'
+import axios from 'axios'
 
 // import data from '@/assets/type2.json'
-import foodListCard from "@/components/TheCreateFoodListCard.vue";
-import ftyCard from "@/components/TheCreateFtyCard.vue";
-import mListCard from "@/components/TheCreateMlistCard.vue";
-import mtyCard from "@/components/TheCreateMtyCard.vue";
-import _ from "lodash";
+import foodListCard from '@/components/TheCreateFoodListCard.vue'
+import ftyCard from '@/components/TheCreateFtyCard.vue'
+import mListCard from '@/components/TheCreateMlistCard.vue'
+import mtyCard from '@/components/TheCreateMtyCard.vue'
+import _ from 'lodash'
 // let ftyArray = reactive([])
 const data = [] //上传用
 data.forEach((element) => {
-  element.typeName = "ftyItem";
+  element.typeName = 'ftyItem'
   element.foodList.forEach((item) => {
-    item.typeName = "foodList";
+    item.typeName = 'foodList'
   })
-});
+})
 
 const state = reactive({
   mainItem: {},
   breadcrumbArray: [],
-});
+})
 
 state.mainItem = {
   allTypeArry: [...data],
-};
+}
 
 state.breadcrumbArray.push({
-  name: "首页",
+  name: '首页',
   id: 0,
   clickItem: { ...state.mainItem },
-});
+})
 
 const nextCardData = (clickItem, clickIndex) => {
   // let addItem = toRaw(clickItem)
-  console.log(toRaw(clickItem), "clickItem");
+  console.log(toRaw(clickItem), 'clickItem')
   const nameCode = {
-    ftyItem: "code",
-    mtyItem: "code",
-    foodList: "fCode",
-    mListList: "code",
+    ftyItem: 'code',
+    mtyItem: 'code',
+    foodList: 'fCode',
+    mListList: 'code',
   }
-  state.mainItem = { ...clickItem };
+  state.mainItem = { ...clickItem }
 
   state.breadcrumbArray.push({
     name: clickItem.code || clickItem.fCode,
@@ -105,27 +102,27 @@ const nextCardData = (clickItem, clickIndex) => {
     clickItem: { ...state.mainItem },
     clickTypeName: clickItem.typeName,
     clickIndex: clickIndex,
-  });
-  console.log(state.breadcrumbArray, "state.breadcrumbArray");
+  })
+  console.log(state.breadcrumbArray, 'state.breadcrumbArray')
   if (state.breadcrumbArray.length >= 1) {
     setSessionPath()
   }
   // console.log(toRaw(state.mainItem), 'mainItem')
   // console.log(isReactive(state.mainItem), 'isReactive')
-};
+}
 const showTab = (headIndex) => {
-  console.log(headIndex, "headIndex");
+  console.log(headIndex, 'headIndex')
   const dataObj = state.breadcrumbArray[headIndex]
-  console.log(dataObj, "dataObj");
-  state.mainItem = { ...dataObj.clickItem };
-  console.log(toRaw(state.breadcrumbArray), "state.breadcrumbArray");
+  console.log(dataObj, 'dataObj')
+  state.mainItem = { ...dataObj.clickItem }
+  console.log(toRaw(state.breadcrumbArray), 'state.breadcrumbArray')
   state.breadcrumbArray = state.breadcrumbArray.filter((item) => {
-    return item.id <= headIndex;
+    return item.id <= headIndex
   })
   if (state.breadcrumbArray.length >= 1) {
     setSessionPath()
   }
-  console.log(toRaw(state.breadcrumbArray), "state.breadcrumbArray");
+  console.log(toRaw(state.breadcrumbArray), 'state.breadcrumbArray')
 }
 // let { mainItem, breadcrumbArray } = toRefs(state)
 const { mainItem, breadcrumbArray } = toRefs(state)
@@ -134,47 +131,46 @@ const setSessionPath = () => {
   const cloneArray = []
   //直接深拷贝数据量太大会造成点击缓慢
   state.breadcrumbArray.forEach((item) => {
-    cloneArray.push({ ...item, clickItem: null });
+    cloneArray.push({ ...item, clickItem: null })
   })
 
-  sessionStorage.setItem("sessionBreadcrumb", JSON.stringify(cloneArray));
+  sessionStorage.setItem('sessionBreadcrumb', JSON.stringify(cloneArray))
 }
 
 const showPathTab = () => {
-  let sessionArray = sessionStorage.getItem("sessionBreadcrumb");
+  let sessionArray = sessionStorage.getItem('sessionBreadcrumb')
   //执行请求,再回显当前索引
   const typeMap = {
-    ftyItem: "allTypeArry",
-    mtyItem: "allTypeArry",
-    foodList: "foodList",
-    mListList: "mListList",
+    ftyItem: 'allTypeArry',
+    mtyItem: 'allTypeArry',
+    foodList: 'foodList',
+    mListList: 'mListList',
   }
   if (sessionArray) {
-    sessionArray = JSON.parse(sessionArray);
-    console.log(sessionArray, "sessionArray");
+    sessionArray = JSON.parse(sessionArray)
+    console.log(sessionArray, 'sessionArray')
     sessionArray.forEach((item, index) => {
       if (index >= 1) {
-        const lastClickItem = state.breadcrumbArray[index - 1].clickItem;
-        console.log(toRaw(lastClickItem));
+        const lastClickItem = state.breadcrumbArray[index - 1].clickItem
+        console.log(toRaw(lastClickItem))
         const itemType = typeMap[item.clickTypeName]
         const lastItem = lastClickItem[itemType]
-        console.log(itemType, lastItem);
+        console.log(itemType, lastItem)
         state.breadcrumbArray.push({
           ...sessionArray[index],
           clickItem: lastItem[item.clickIndex],
-        });
-        console.log(toRaw(state.breadcrumbArray));
+        })
+        console.log(toRaw(state.breadcrumbArray))
       }
-    });
-    const lastMainItem =
-      state.breadcrumbArray[state.breadcrumbArray.length - 1]
-    console.log(lastMainItem, "lastMainItem");
-    state.mainItem = { ...lastMainItem.clickItem };
+    })
+    const lastMainItem = state.breadcrumbArray[state.breadcrumbArray.length - 1]
+    console.log(lastMainItem, 'lastMainItem')
+    state.mainItem = { ...lastMainItem.clickItem }
   }
-};
+}
 
 onMounted(() => {
-  showPathTab();
+  showPathTab()
 })
 // const getData = () => {
 //   // axios

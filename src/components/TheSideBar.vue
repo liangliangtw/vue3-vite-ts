@@ -10,7 +10,7 @@
       text-color="rgb(191, 203, 217)"
     >
       <div class="avatarIcon">
-        <el-avatar :size="80" src="src/assets/avatar.png"></el-avatar>
+        <el-avatar :size="80" :src="avatarSrc"></el-avatar>
       </div>
       <template v-for="route in menuList" :key="route.path">
         <template v-if="!route['hidden']">
@@ -58,25 +58,35 @@
 // import { onMounted, reactive, ref, toRefs, watch } from 'vue'
 
 // import { useRouter, useRoute } from 'vue-router'
-import { useUserStore } from "@/store/user.ts";
-import { storeToRefs } from "pinia";
+import avatarSrc from '@/assets/avatar.png'
+import { baseRouter } from '@/router/baseRouter.ts'
+import { allLayoutMap } from '@/router/allRouter.ts'
+
+import { useUserStore } from '@/store/user.ts'
+import { storeToRefs } from 'pinia'
 const prosData = defineProps({
   isCollapse: {
     type: Boolean, // 注意是type: String,不是type: 'string',
     default: false,
   },
-});
-const store = useUserStore();
+})
+const store = useUserStore()
 // 获取路由器实例
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
-let menuList = reactive([]);
+let menuList = reactive([])
 // let routerList = router.getRoutes()
 const defaultActive = ref()
-menuList = router.options.routes;
+// menuList = router.options.routes
 
+const cloneBaseList = JSON.parse(JSON.stringify(baseRouter))
+const cloneAllLayoutMap = JSON.parse(JSON.stringify(allLayoutMap))
+cloneBaseList[0].children = [...cloneBaseList[0].children, ...cloneAllLayoutMap]
+menuList = cloneBaseList
+console.log(menuList, 'menuList')
 // console.log(router.getRoutes(), 'router.getRoutes()')
+// console.log(menuList, router.getRoutes(), 'router.getRoutes()')
 // menuList = routerList.filter((route) => {
 //   // console.log(route, 'route')
 //   const isSidebar = route.meta.isSideBar ? route.meta.isSideBar : 0
@@ -88,16 +98,19 @@ menuList = router.options.routes;
 // menuList = router.getRoutes()
 // const { menuList } = storeToRefs(store)
 // console.log(toRaw(menuList.value), 'menuList')
-
+const toPath = (path) => {
+  console.log(path, 'path')
+  router.replace(path)
+}
 watch(
   () => router.currentRoute.value.path,
   (newVal, oldVal) => {
-    defaultActive.value = newVal;
+    defaultActive.value = newVal
     // console.log(newVal, '新的路由')
     // console.log(oldVal, '旧的路由')
   },
   { immediate: true }
-);
+)
 </script>
 
 <style scoped>

@@ -9,6 +9,13 @@
 <script setup></script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 #app {
   position: fixed;
   left: 0;
@@ -23,11 +30,6 @@
 
   /* color: #2c3e50; */
   /* margin-top: 60px; */
-}
-html,
-body {
-  margin: 0;
-  padding: 0;
 }
 
 /* .fade-enter-active,

@@ -1,81 +1,63 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-import { routes, layoutMap } from "./asyncRouter";
-import { useUserStore } from "@/store/user";
-import { storeToRefs } from "pinia";
-import { filterAsyncRouter } from "@/untils/tool";
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Dashboard',
-//     // redirect: '/baseRouter',
-//     meta: { title: '首页', icon: 'menu', isSideBar: 1, },
-//     component: () => import('@/components/Dashboard.vue'),
-//     children: [
-//       {
-//         path: 'baseRouter',
-//         name: 'BaseRouter',
-//         component: () => import('@/views/baseRouter.vue'),
-//         meta: { title: '组件路由' }
-//       }
-//     ]
-//   },
-//   {
-//     path: "/:pathMatch(.*)*", // 必须使用正则表达式,
-//     // path: "/:w+", // 必须使用正则表达式
-//     hidden: true,
-//     name: 'errorPage',
-//     component: () => import('@/views/base404Page.vue'),
-//   }
-// ]
-
+import { allLayoutMap } from './allRouter'
+import { layoutMap } from './asyncRouter'
+import { baseRouter, errorRouter } from './baseRouter'
+import { useUserStore } from '@/store/user'
+// import { storeToRefs } from 'pinia'
+import { filterAsyncRouter } from '@/untils/tool'
 // let accessedRouters = filterAsyncRouter(routes, 'admin');
+const creatRouter = () => {
+  return createRouter({
+    history: createWebHistory(),
+    routes: baseRouter,
+  })
+}
+let router = creatRouter()
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
-// console.log(router.getRoutes(), 'test')
-// router.addRoute({ name: 'admin', path: '/admin', component: () => import('@/views/basePiniaPage.vue') })
-// router.addRoute('admin', { path: 'settings', component: () => import('@/views/baseFather/index.vue') })
-// console.log(router.getRoutes(), '添加路由后');
+//重置路由：清空user 创建新的router store清空routes记录
+export function resetRouter(): void {
+  const store = useUserStore()
+  sessionStorage.setItem('user', '')
+  router = creatRouter()
+  store.setAllRoutes([])
+}
 
-// console.log(router.getRoutes());
-// router.addRoute('Dashboard', {
-//   path: '/baseWatchApi',
-//   name: 'BaseWatchApi',
-//   component: () => import('@/views/baseWatchApi.vue'),
-//   meta: { title: '监听' }
-// })
+router.beforeEach((to, from, next) => {
+  const store = useUserStore()
+  if (to.path === '/login' || to.path === '') {
+    console.log('进入删除路由')
+    resetRouter()
+    console.log('删除路由-全部路由', router.getRoutes())
+    next()
+    return
+  }
+  if (store.allRoutes && store.allRoutes.length > 0) {
+    console.log(router.hasRoute('BaseWatchApi'), 'hasRoute')
+    console.log('已有-共享路由', store.allRoutes)
+    console.log('已有-全部路由', router.getRoutes())
+    next()
+  } else {
+    const user: string | null = sessionStorage.getItem('user')
+    if (user) {
+      if (user.length > 3) {
+        console.log('进入添加路由>3')
+        allLayoutMap.forEach((item) => {
+          router.addRoute('Dashboard', item)
+        })
+      } else {
+        console.log('进入添加路由<3')
+        layoutMap.forEach((item) => {
+          router.addRoute('Dashboard', item)
+        })
+      }
+    }
 
-// router.beforeEach((to, from, next) => {
-//   // console.log(router.getRoutes());
-//   const store = useUserStore()
+    // router.addRoute(errorRouter) // 最后添加404路由
+    store.setAllRoutes(router.getRoutes())
+    console.log(router.getRoutes(), 'router.getRoutes()')
+    next({ ...to, replace: true })
+  }
+})
 
-//   let userRoles = sessionStorage.getItem('userRoles')
-
-//   // console.log(isAddRouter.value, isAddRouter, 'store');
-//   if (!userRoles) {
-//     console.log('进入1');
-//     // store.setAsyncRoutes('admin', router)
-//     store.filterRouter()
-//     console.log(userRoles, 'userRoles');
-//     next()
-//     // console.log(router.getRoutes());
-//     // console.log(routerList, '查看现有路由')
-//     // next({ ...to, replace: true })     //路由进行重定向放行
-//   } else {
-//     console.log('进入2');
-//     if (to.meta.hasOwnProperty('roles')) {
-//       let routerRoles: any = to.meta.roles || []
-//       routerRoles.includes(routerRoles) ? next() : next('/error')
-//       return false
-//     } else {
-//       next()
-//     }
-//   }
-
-// })
-
-export default router;
+export default router

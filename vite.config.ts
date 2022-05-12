@@ -31,7 +31,7 @@ export default defineConfig({
     AutoImport({
       //引入element plus自动api支持
       resolvers: [ElementPlusResolver()],
-      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
+      imports: ['vue', 'vue-router', 'vue-i18n'],
       // 可以选择auto-import.d.ts生成的位置，使用ts建议设置为'src/auto-import.d.ts'
       dts: 'src/autoImports/auto-imports.d.ts',
       // 解决eslint报错问题

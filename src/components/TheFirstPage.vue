@@ -26,46 +26,50 @@
 </template>
 
 <script setup>
-let noValue = $ref(1);
-const testName = ref("良田伍")
+import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+let noValue = $ref(1)
+const testName = ref('良田伍')
 const changeName = () => {
-  testName.value = "Tom";
+  testName.value = 'Tom'
 }
 const personObj = reactive({
-  testTestName: "testName",
+  testTestName: 'testName',
   age: 18,
   phone: 13486395621,
-  sex: "不男不女",
+  sex: '不男不女',
   testObj: {
-    uu: "yy",
+    uu: 'yy',
   },
-  testToRefsObj: { test1: "测试toRefs" },
-});
+  testToRefsObj: { test1: '测试toRefs' },
+})
 // personObj.name = 'haha'
 const add = () => {
-  personObj.age++;
+  personObj.age++
+  router.replace('/dashboard/baseWatchApi')
 }
 
 // 解构后拿值一定要.value拿
 // 解构需要.value拿值
-const count = ref(1);
+const count = ref(1)
 const doubleCount = computed(() => {
-  return count.value * 2;
+  return count.value * 2
 })
 const noTorefs = reactive({
-  testName: "LL",
+  testName: 'LL',
   testAge: 55,
-});
+})
 
 const open = () => {
-  ElMessage("this is a message.");
+  ElMessage('this is a message.')
 }
 setTimeout(() => {
   // console.log(testObj.value.uu, 'testObj')
   // testObj.value.uu = '过了2秒之后'
-  personObj.testObj.uu = "过了2秒之后";
-  noValue = 5;
-}, 2000);
+  personObj.testObj.uu = '过了2秒之后'
+  noValue = 5
+}, 2000)
 
 const { testTestName, phone, sex, age, testObj } = toRefs(personObj)
 
@@ -94,24 +98,24 @@ arr.push(...[1, 2, 3])
 
 // toRefs解构重新赋值无法更新
 const toRefsObj = {
-  test1: { age: "哈哈" },
+  test1: { age: '哈哈' },
 }
 personObj.testToRefsObj = {
-  test1: { cc: "cc" },
-};
+  test1: { cc: 'cc' },
+}
 
 const onTestToRefs = () => {
-  personObj.testToRefsObj = { ...toRefsObj };
+  personObj.testToRefsObj = { ...toRefsObj }
 }
 const { test1 } = toRefs(personObj.testToRefsObj) // 无法结构多层
 
 const open1 = () => {
   ElNotification({
-    title: "Success",
-    message: "This is a success message",
+    title: 'Success',
+    message: 'This is a success message',
     duration: 0,
-    type: "success",
-  });
+    type: 'success',
+  })
 }
 </script>
 

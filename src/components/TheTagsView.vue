@@ -9,7 +9,9 @@
         :class="{ active: isActive(item.path) }"
       >
         {{ item.title }}
-        <span class="el-icon-close" @click="closeTags(index)"></span>
+        <el-icon @click="closeTags(index)"><close /></el-icon>
+
+        <!-- <span class="el-icon-close" @click="closeTags(index)"></span> -->
       </router-link>
       <!-- <div class="tags-close-box">
       <el-dropdown @command="handleTags">
@@ -30,71 +32,69 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useUserStore } from "@/store/user";
+import { computed } from 'vue'
+import { useUserStore } from '@/store/user'
 
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 export default {
   setup() {
-    const route = useRoute();
-    const router = useRouter();
+    const route = useRoute()
+    const router = useRouter()
     const isActive = (path) => {
-      return path === route.fullPath;
+      return path === route.fullPath
     }
 
-    const store = useUserStore();
-    const tagsList = computed(() => store.tagsList);
-    const showTags = computed(() => tagsList.value.length > 0);
+    const store = useUserStore()
+    const tagsList = computed(() => store.tagsList)
+    const showTags = computed(() => tagsList.value.length > 0)
 
     // 关闭单个标签
     const closeTags = (index) => {
-      const delItem = tagsList.value[index];
-      store.delTagsItem({ index });
-      const item = tagsList.value[index]
-        ? tagsList.value[index]
-        : tagsList.value[index - 1];
+      const delItem = tagsList.value[index]
+      store.delTagsItem({ index })
+      const item = tagsList.value[index] ? tagsList.value[index] : tagsList.value[index - 1]
       if (item) {
-        delItem.path === route.fullPath && router.push(item.path);
+        delItem.path === route.fullPath && router.push(item.path)
       } else {
-        router.push("/");
+        router.push('/')
       }
-    };
+    }
 
     // 设置标签
     const setTags = (route) => {
       const isExist = tagsList.value.some((item) => {
-        return item.path === route.fullPath;
+        return item.path === route.fullPath
       })
       if (!isExist) {
         if (tagsList.value.length >= 8) {
-          store.delTagsItem({ index: 0 });
+          store.delTagsItem({ index: 0 })
         }
         store.setTagsItem({
           name: route.name,
           title: route.meta.title,
           path: route.fullPath,
-        });
+        })
       }
-    };
-    setTags(route);
+    }
+    setTags(route)
     onBeforeRouteUpdate((to) => {
-      setTags(to);
+      setTags(to)
     })
 
     // 关闭全部标签
     const closeAll = () => {
-      store.clearTags();
-      router.push("/");
+      store.clearTags()
+      router.push('/')
     }
     // 关闭其他标签
     const closeOther = () => {
       const curItem = tagsList.value.filter((item) => {
-        return item.path === route.fullPath;
+        return item.path === route.fullPath
       })
-      store.closeTagsOther(curItem);
+      store.closeTagsOther(curItem)
     }
     const handleTags = (command) => {
-      command === "other" ? closeOther() : closeAll();
+      command === 'other' ? closeOther() : closeAll()
     }
 
     // 关闭当前页面的标签页
@@ -109,9 +109,9 @@ export default {
       showTags,
       closeTags,
       handleTags,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -150,14 +150,14 @@ export default {
         color: #fff;
         border-color: #42b983;
         &::before {
-          content: "";
+          content: '';
           background: #fff;
           display: inline-block;
           width: 8px;
           height: 8px;
           border-radius: 50%;
           position: relative;
-          margin-right: 2px;
+          margin-right: 4px;
         }
       }
     }
@@ -189,11 +189,12 @@ export default {
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
-    .el-icon-close {
+    .el-icon {
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      vertical-align: 2px;
+      // width: 16px;
+      // height: 16px;
+      margin-left: 2px;
+      vertical-align: -1px;
       border-radius: 50%;
       text-align: center;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);

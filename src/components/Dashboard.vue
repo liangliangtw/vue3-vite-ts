@@ -15,12 +15,7 @@
           >
             <expand />
           </el-icon>
-          <el-icon
-            v-else
-            class="collapseIcon"
-            :size="25"
-            @click="isCollapse = !isCollapse"
-          >
+          <el-icon v-else class="collapseIcon" :size="25" @click="isCollapse = !isCollapse">
             <fold />
           </el-icon>
         </div>
@@ -32,7 +27,7 @@
             </el-icon>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
+                <el-dropdown-item @click="LogOut">Log Out</el-dropdown-item>
                 <el-dropdown-item>Add</el-dropdown-item>
                 <el-dropdown-item>Delete</el-dropdown-item>
               </el-dropdown-menu>
@@ -50,12 +45,12 @@
 <script lang="ts" setup>
 // import homeNav from '@/components/TheHomeNav.vue'
 // import sideBar from '@/components/TheSideBar.vue'
-import Breadcrumb from "@/components/TheBreadcrumb.vue";
-import vTags from "@/components/TheTagsView.vue";
-import { useUserStore } from "@/store/user";
-const store = useUserStore();
-const router = useRouter();
-const route = useRoute();
+import Breadcrumb from '@/components/TheBreadcrumb.vue'
+import vTags from '@/components/TheTagsView.vue'
+import { useUserStore } from '@/store/user'
+const store = useUserStore()
+const router = useRouter()
+const route = useRoute()
 
 const menuList = reactive([])
 // menuList = router.options.routes
@@ -63,8 +58,11 @@ const menuList = reactive([])
 const defaultActive = ref()
 const isCollapse = ref(false)
 const showTagsView = computed(() => {
-  return store.showTagsView;
+  return store.showTagsView
 })
+const LogOut = () => {
+  router.push('/login')
+}
 </script>
 
 <style scoped>
