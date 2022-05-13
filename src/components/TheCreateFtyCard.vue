@@ -3,13 +3,13 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs } from 'vue'
 defineProps({
   typeItem: {
     type: Object,
     default: {},
   },
-});
+})
 // const emit = defineEmits(['nextCardData'])
 // const sendCardItem = () => {
 //   console.log('ii')

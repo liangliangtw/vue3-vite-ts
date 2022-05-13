@@ -47,7 +47,13 @@ const personObj = reactive({
 // personObj.name = 'haha'
 const add = () => {
   personObj.age++
-  router.replace('/dashboard/baseWatchApi')
+  // router.addRoute('Dashboard', {
+  //   path: '/dashboard/baseWatchApi',
+  //   name: 'BaseWatchApi',
+  //   component: () => import('@/views/baseWatchApi.vue'),
+  //   meta: { title: '监听' },
+  // })
+  // router.replace('/dashboard/baseWatchApi')
 }
 
 // 解构后拿值一定要.value拿
@@ -117,6 +123,12 @@ const open1 = () => {
     type: 'success',
   })
 }
+
+// const testArray = ref([{ name: 1 }, { name: 3 }, { name: 4 }, { name: 3 }])
+// const isExist = testArray.value.some((element) => {
+//   return element.name === 1
+// })
+// console.log(isExist, 'isExist')
 </script>
 
 <style scoped>

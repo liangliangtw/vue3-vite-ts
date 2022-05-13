@@ -59,6 +59,7 @@ export const useUserStore = defineStore({
     },
     setTagsItem(data: any) {
       this.tagsList.push(data as never)
+      console.log(this.tagsList, 'this.tagsList')
     },
     clearTags() {
       this.tagsList = []

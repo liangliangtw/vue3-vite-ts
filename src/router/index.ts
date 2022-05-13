@@ -7,6 +7,7 @@ import { useUserStore } from '@/store/user'
 // import { storeToRefs } from 'pinia'
 import { filterAsyncRouter } from '@/untils/tool'
 // let accessedRouters = filterAsyncRouter(routes, 'admin');
+
 const creatRouter = () => {
   return createRouter({
     history: createWebHistory(),
@@ -34,19 +35,19 @@ router.beforeEach((to, from, next) => {
   }
   if (store.allRoutes && store.allRoutes.length > 0) {
     console.log(router.hasRoute('BaseWatchApi'), 'hasRoute')
-    console.log('已有-共享路由', store.allRoutes)
-    console.log('已有-全部路由', router.getRoutes())
+    // console.log('已有-共享路由', store.allRoutes)
+    // console.log('已有-全部路由', router.getRoutes())
     next()
   } else {
     const user: string | null = sessionStorage.getItem('user')
     if (user) {
       if (user.length > 3) {
-        console.log('进入添加路由>3')
+        // console.log('进入添加路由>3')
         allLayoutMap.forEach((item) => {
           router.addRoute('Dashboard', item)
         })
       } else {
-        console.log('进入添加路由<3')
+        // console.log('进入添加路由<3')
         layoutMap.forEach((item) => {
           router.addRoute('Dashboard', item)
         })
@@ -55,7 +56,7 @@ router.beforeEach((to, from, next) => {
 
     // router.addRoute(errorRouter) // 最后添加404路由
     store.setAllRoutes(router.getRoutes())
-    console.log(router.getRoutes(), 'router.getRoutes()')
+    // console.log(router.getRoutes(), 'router.getRoutes()')
     next({ ...to, replace: true })
   }
 })
