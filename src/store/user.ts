@@ -48,6 +48,8 @@ export const useUserStore = defineStore({
       // this.isAddRouter = false
     },
     setAllRoutes(list: any) {
+      console.log('进入这里')
+
       this.allRoutes = list
     },
     setAsyncRoutestMark() {

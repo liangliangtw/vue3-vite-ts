@@ -62,8 +62,10 @@ const isCollapse = ref(false)
 const showTagsView = computed(() => {
   return store.showTagsView
 })
+
 const LogOut = () => {
   resetRouter()
+
   router.push('/login')
 }
 </script>

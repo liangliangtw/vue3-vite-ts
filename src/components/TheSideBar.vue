@@ -80,7 +80,7 @@ let menuList = reactive([])
 const defaultActive = ref()
 // menuList = router.options.routes
 
-console.log(router, 'sidebar页面标识')
+console.log(router.getRoutes(), 'sidebar页面标识')
 
 const cloneBaseList = JSON.parse(JSON.stringify(baseRouter))
 const cloneAllLayoutMap = JSON.parse(JSON.stringify(allLayoutMap))
