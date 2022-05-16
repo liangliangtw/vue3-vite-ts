@@ -49,11 +49,11 @@ const showTags = computed(() => tagsList.value.length > 0)
 // 关闭单个标签
 const closeTags = (index) => {
   const delItem = tagsList.value[index]
-  console.log(delItem, 'delItem')
+  // console.log(delItem, 'delItem')
   store.delTagsItem({ index })
   const item = tagsList.value[index] ? tagsList.value[index] : tagsList.value[index - 1]
   if (item) {
-    console.log(delItem.path, route.fullPath, item, 'itemCloseTags')
+    // console.log(delItem.path, route.fullPath, item, 'itemCloseTags')
     // delItem.path === route.fullPath &&
     router.push(item.path)
   } else {
@@ -63,13 +63,13 @@ const closeTags = (index) => {
 
 // 设置标签
 const setTags = (route) => {
-  console.log(tagsList.value, route, '设置标签')
+  // console.log(tagsList.value, route, '设置标签')
   const isExist = tagsList.value.some((item) => {
     return item.path === route.fullPath
   })
-  console.log(isExist, '标签isExist')
+  // console.log(isExist, '标签isExist')
   if (!isExist) {
-    console.log(isExist, '进入这里')
+    // console.log(isExist, '进入这里')
 
     if (tagsList.value.length >= 8) {
       store.delTagsItem({ index: 0 })
@@ -83,7 +83,7 @@ const setTags = (route) => {
 }
 setTags(route)
 onBeforeRouteUpdate((to) => {
-  console.log(to, '多次触发')
+  // console.log(to, '多次触发')
   setTags(to)
 })
 

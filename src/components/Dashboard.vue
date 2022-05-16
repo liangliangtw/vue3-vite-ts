@@ -47,6 +47,8 @@
 // import sideBar from '@/components/TheSideBar.vue'
 import Breadcrumb from '@/components/TheBreadcrumb.vue'
 import vTags from '@/components/TheTagsView.vue'
+import { resetRouter } from '@/router'
+
 import { useUserStore } from '@/store/user'
 const store = useUserStore()
 const router = useRouter()
@@ -61,6 +63,7 @@ const showTagsView = computed(() => {
   return store.showTagsView
 })
 const LogOut = () => {
+  resetRouter()
   router.push('/login')
 }
 </script>

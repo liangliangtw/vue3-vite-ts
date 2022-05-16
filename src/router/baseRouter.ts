@@ -107,7 +107,6 @@ const baseRouter = [
     path: '/',
     hidden: true,
     redirect: '/login',
-    component: () => import('@/views/baseLogin.vue'),
   },
   {
     path: '/login', // 必须使用正则表达式,

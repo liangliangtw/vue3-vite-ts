@@ -80,21 +80,13 @@ let menuList = reactive([])
 const defaultActive = ref()
 // menuList = router.options.routes
 
+console.log(router, 'sidebar页面标识')
+
 const cloneBaseList = JSON.parse(JSON.stringify(baseRouter))
 const cloneAllLayoutMap = JSON.parse(JSON.stringify(allLayoutMap))
 cloneBaseList[0].children = [...cloneBaseList[0].children, ...cloneAllLayoutMap]
 menuList = cloneBaseList
-console.log(menuList, 'menuList')
-// console.log(router.getRoutes(), 'router.getRoutes()')
-// console.log(menuList, router.getRoutes(), 'router.getRoutes()')
-// menuList = routerList.filter((route) => {
-//   // console.log(route, 'route')
-//   const isSidebar = route.meta.isSideBar ? route.meta.isSideBar : 0
-//   if (isSidebar) {
-//     return route
-//   }
-//   // return route.meta.isSideBar
-// })
+
 // menuList = router.getRoutes()
 // const { menuList } = storeToRefs(store)
 // console.log(toRaw(menuList.value), 'menuList')
