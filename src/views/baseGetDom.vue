@@ -3,11 +3,11 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, toRefs } from "vue";
+import { onMounted, reactive, ref, toRefs } from 'vue'
 
-const dom = ref(null);
+const dom = ref(null)
 onMounted(() => {
-  console.log(dom.value);
+  console.log(dom.value)
 })
 // console.log(dom.value)
 </script>

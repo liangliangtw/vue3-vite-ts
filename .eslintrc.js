@@ -39,8 +39,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-var': 'error',
     'prettier/prettier': 'error',
-    // 禁止出现console
-    'no-console': 'warn',
     // 禁用debugger
     'no-debugger': 'warn',
     // 禁止出现重复的 case 标签
@@ -147,6 +145,8 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
+    // 允许出现console
+    'no-console': 'off',
   },
   globals: {
     defineProps: 'readonly',

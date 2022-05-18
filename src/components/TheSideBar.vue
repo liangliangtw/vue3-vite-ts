@@ -73,7 +73,7 @@ const prosData = defineProps({
 const store = useUserStore()
 // 获取路由器实例
 const router = useRouter()
-const route = useRoute()
+// const route = useRoute()
 
 let menuList = reactive([])
 // let routerList = router.getRoutes()

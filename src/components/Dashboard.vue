@@ -65,7 +65,6 @@ const showTagsView = computed(() => {
 
 const LogOut = () => {
   resetRouter()
-
   router.push('/login')
 }
 </script>

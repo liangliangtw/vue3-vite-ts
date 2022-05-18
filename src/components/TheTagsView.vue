@@ -1,32 +1,24 @@
 <template>
-  <div v-if="showTags" class="tags-view-container">
+  <div v-if="showTags" ref="tagsContainer" class="tags-view-container">
     <el-scrollbar ref="scrollContainer" class="tags-view-wrapper">
-      <ul>
-        <li
-          v-for="(item, index) in tagsList"
-          :key="index"
-          class="tags-view-item"
-          :class="{ active: isActive(item.path) }"
-        >
-          <router-link :to="item.path">{{ item.title }}</router-link>
-          <el-icon @click="closeTags(index)"><close /></el-icon>
-        </li>
-      </ul>
-      <!-- <div class="tags-close-box">
-      <el-dropdown @command="handleTags">
-        <el-button size="mini" type="primary">
-          标签选项
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </el-button>
-        <template #dropdown>
-          <el-dropdown-menu size="small">
-            <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-            <el-dropdown-item command="all">关闭所有</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div> -->
+      <router-link
+        v-for="(item, index) in tagsList"
+        :key="index"
+        class="tags-view-item"
+        :class="{ active: isActive(item.path) }"
+        :to="item.path"
+        @contextmenu.prevent="openMenu(item, $event)"
+      >
+        {{ item.title }}
+        <el-icon @click.prevent.stop="closeTags(index)"><close /></el-icon>
+      </router-link>
     </el-scrollbar>
+    <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
+      <!-- <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li> -->
+      <li @click="closeOther">Close Others</li>
+      <li @click="closeAll">Close All</li>
+    </ul>
   </div>
 </template>
 
@@ -38,6 +30,12 @@ import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
+const state = reactive({
+  left: 0,
+  top: 0,
+  visible: false,
+  tagsContainer: null,
+})
 const isActive = (path) => {
   return path === route.fullPath
 }
@@ -90,7 +88,7 @@ onBeforeRouteUpdate((to) => {
 // 关闭全部标签
 const closeAll = () => {
   store.clearTags()
-  router.push('/')
+  router.push('/dashboard')
 }
 // 关闭其他标签
 const closeOther = () => {
@@ -102,12 +100,50 @@ const closeOther = () => {
 const handleTags = (command) => {
   command === 'other' ? closeOther() : closeAll()
 }
+const tagsContainer = ref(null)
+const openMenu = (tag, e) => {
+  const menuMinWidth = 105
+  const offsetLeft = tagsContainer.value.getBoundingClientRect().left // container margin left
+  const offsetWidth = tagsContainer.value.offsetWidth // container width
+  const maxLeft = offsetWidth - menuMinWidth // left boundary
+  // const left = e.clientX - offsetLeft + 15 // 15: margin right
+  const left = e.clientX + 15
+  console.log(offsetLeft, offsetWidth, maxLeft, left)
+
+  if (left > maxLeft) {
+    state.left = maxLeft
+  } else {
+    state.left = left
+  }
+  state.top = e.clientY
+  state.visible = true
+  // state.selectedTag = tag
+}
+const closeMenu = () => {
+  state.visible = false
+}
+
+watch(
+  () => state.visible,
+  (newVal) => {
+    if (newVal) {
+      document.body.addEventListener('click', closeMenu)
+    } else {
+      document.body.removeEventListener('click', closeMenu)
+    }
+  },
+  {
+    immediate: true, // 立即执行
+    deep: true, // 深度监听
+  }
+)
 
 // 关闭当前页面的标签页
 // store.commit("closeCurrentTag", {
 //     $router: router,
 //     $route: route
 // });
+const { left, top, visible } = toRefs(state)
 </script>
 
 <style lang="scss" scoped>
@@ -118,10 +154,6 @@ const handleTags = (command) => {
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   .tags-view-wrapper {
-    ul {
-      margin: 0;
-      padding: 0;
-    }
     .tags-view-item {
       display: inline-block;
       position: relative;

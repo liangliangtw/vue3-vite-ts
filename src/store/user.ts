@@ -17,7 +17,7 @@ export const useUserStore = defineStore({
     phone: <number | null>null,
     date: 19950218,
     computedVal: '哈喽',
-    asyncRoutestMark: sessionStorage.getItem('asyncRoutestMark'),
+    asyncRoutesMark: sessionStorage.getItem('asyncRoutesMark'),
     allRoutes: [],
     tagsList: [],
   }),
@@ -52,8 +52,8 @@ export const useUserStore = defineStore({
 
       this.allRoutes = list
     },
-    setAsyncRoutestMark() {
-      sessionStorage.setItem('asyncRoutestMark', 'true')
+    setAsyncRoutesMark() {
+      sessionStorage.setItem('asyncRoutesMark', 'true')
     },
 
     delTagsItem(data: any) {

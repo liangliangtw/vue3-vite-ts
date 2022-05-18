@@ -30,6 +30,20 @@ import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vu
 const router = useRouter()
 const route = useRoute()
 let noValue = $ref(1)
+/**
+ref和toRef区别:
+ref->复制, 修改响应式数据不会影响原始数据
+toRef->引用, 修改响应式数据会影响原始数据
+ref->数据发生改变, 界面就会自动更新
+toRef->数据发生改变, 界面也不会自动更新
+
+ref和reactive区别:
+ref->单一数据类型，有value属性；
+reactive->复杂数据类型，无value属性；
+————————————————
+版权声明：本文为CSDN博主「chen_sir_sh」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/m54584mnkj/article/details/121652258
+ */
 const testName = ref('良田伍')
 const changeName = () => {
   testName.value = 'Tom'
@@ -78,6 +92,18 @@ setTimeout(() => {
 }, 2000)
 
 const { testTestName, phone, sex, age, testObj } = toRefs(personObj)
+
+/**
+ * ctrl+win+t=====>函数注释注释快捷键
+ * unref()
+ * 对ref内的值进行解析，如果是ref则返回ref.value的值，不是则返回传入的对象
+ */
+const testObj1 = { name: 'alex', age: '5' }
+const testRefObj2 = ref({ name: 'alex', age: '5' })
+const testVal3 = unref(testObj1) //如果是ref则返回ref.value的值，不是则返回传入的对象
+const testVal4 = unref(testRefObj2) //如果是ref则返回ref.value的值，不是则返回传入的对象
+console.log(testVal3) //Object {age: "5",name: "alex"}
+console.log(testVal4) //Proxy {name: 'alex', age: '5'}
 
 /*
 数组重新赋值方法
