@@ -37,7 +37,9 @@
         </div>
       </el-header>
       <v-tags></v-tags>
-      <router-view />
+      <div class="mainBox-cell-view">
+        <router-view />
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -59,9 +61,6 @@ const menuList = reactive([])
 
 const defaultActive = ref()
 const isCollapse = ref(false)
-const showTagsView = computed(() => {
-  return store.showTagsView
-})
 
 const LogOut = () => {
   resetRouter()
@@ -78,6 +77,7 @@ const LogOut = () => {
 .layout-container-demo-sideBar {
   flex-shrink: 0;
 }
+
 .layout-container-demo .mainBox .el-header {
   display: flex;
   position: relative;
@@ -85,7 +85,11 @@ const LogOut = () => {
   color: var(--el-text-color-primary);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
+.mainBox-cell-view {
+  height: 100%;
 
+  overflow: auto;
+}
 .layout-container-demo .el-aside {
   width: 240px;
   color: var(--el-text-color-primary);
@@ -98,6 +102,7 @@ const LogOut = () => {
 }
 .layout-container-demo .el-main {
   padding: 0;
+  overflow: hidden;
 }
 .layout-container-demo .toolbar {
   position: absolute;

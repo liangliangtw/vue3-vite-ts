@@ -1,14 +1,14 @@
 <template>请求:{{ imgRes }}</template>
 
 <script setup>
-import { onMounted, reactive, ref, toRefs } from "vue";
+import { onMounted, reactive, ref, toRefs } from 'vue'
 /*
   把id='modal'挂载到想要挂载的位置
  */
-import axios from "axios";
+import axios from 'axios'
 onMounted(() => {
   // allRequest()
-  console.log("打印");
+  console.log('打印')
 })
 
 /*
@@ -53,16 +53,16 @@ const imgRes = reactive([])
 // }
 const getImg = async (data) => {
   await axios
-    .get("https://api.thecatapi.com/v1/images/search?limit=1")
+    .get('https://api.thecatapi.com/v1/images/search?limit=1')
     .then((res) => {
-      imgRes.push(...res.data);
-      console.log(imgRes.data, "请求图片结果");
+      imgRes.push(...res.data)
+      console.log(imgRes.data, '请求图片结果')
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error)
     })
 }
 // getData()
-await getImg();
+await getImg()
 </script>
 <style scoped></style>

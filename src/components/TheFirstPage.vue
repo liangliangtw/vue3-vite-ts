@@ -27,9 +27,24 @@
 
 <script setup>
 import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+import { getUser, pushTxT } from '@/service/api/testApi'
 const router = useRouter()
 const route = useRoute()
-let noValue = $ref(1)
+const testAxios = async () => {
+  console.log('开始')
+  const params = {
+    type: 'all',
+    page: '0',
+    count: '20',
+  }
+  console.log(getUser, pushTxT)
+  const res = await getUser('/users')
+  const res2 = await pushTxT('/posts', { userId: 1, title: 'test', body: 'test' })
+  console.log(res, res2, '请求的结果')
+}
+testAxios()
+
+const noValue = $ref(1)
 /**
 ref和toRef区别:
 ref->复制, 修改响应式数据不会影响原始数据

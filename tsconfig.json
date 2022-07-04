@@ -10,6 +10,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
+    "types": [
+      "vite/client"
+    ],
     "allowSyntheticDefaultImports": true,
     // "noImplicitAny": false, // noImplicitAny如果我们没有一些值设置明确类型，编译器会默认认为这个值为any类型，如果将noImplicitAny设为true,则如果没有设置明确的类型会报错，默认值为false
     //原有代码
