@@ -1,5 +1,5 @@
 //http.ts
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'
 import { showMessage } from './statusCode' // 引入状态码文件
 import { ElMessage } from 'element-plus' // 引入el 提示框
 // 设置请求头和请求路径
@@ -17,13 +17,13 @@ axios.interceptors.request.use(
     }
     return config
   },
-  (error) => {
+  (error: AxiosError) => {
     return error
   }
 )
 // 响应拦截
 axios.interceptors.response.use(
-  (res) => {
+  (res: AxiosResponse) => {
     // if (res.data.code === 111) {
     //   sessionStorage.setItem('token', '')
     //   // token过期操作
@@ -37,7 +37,7 @@ axios.interceptors.response.use(
     // }
     return res
   },
-  (error) => {
+  (error: AxiosError) => {
     ElMessage.warning('网络连接异常,请稍后再试!')
     return Promise.reject(error)
   }

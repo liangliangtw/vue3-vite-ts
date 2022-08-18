@@ -3,6 +3,7 @@ import { json } from 'stream/consumers'
 
 import { tr } from 'element-plus/lib/locale'
 import { hasPermission, filterAsyncRouter } from '@/untils/tool'
+import { ISetTagsItem, IDelTagsItem } from './interface'
 
 export const useUserStore = defineStore({
   id: 'user', // id必填，且需要唯一
@@ -19,7 +20,7 @@ export const useUserStore = defineStore({
     computedVal: '哈喽',
     asyncRoutesMark: sessionStorage.getItem('asyncRoutesMark'),
     allRoutes: [],
-    tagsList: [],
+    tagsList: <ISetTagsItem[]>[],
   }),
   actions: {
     updateUserInfo(newUserInfo: any, count: number) {
@@ -37,7 +38,7 @@ export const useUserStore = defineStore({
       this.phone = phone
       this.date = 12121
     },
-    getUserPhone() {
+    getUserPhone(): number {
       return 18024168369
     },
     getUserRole() {
@@ -49,18 +50,17 @@ export const useUserStore = defineStore({
     },
     setAllRoutes(list: any) {
       console.log('进入这里')
-
       this.allRoutes = list
     },
     setAsyncRoutesMark() {
       sessionStorage.setItem('asyncRoutesMark', 'true')
     },
 
-    delTagsItem(data: any) {
+    delTagsItem(data: IDelTagsItem) {
       this.tagsList.splice(data.index, 1)
     },
-    setTagsItem(data: any) {
-      this.tagsList.push(data as never)
+    setTagsItem(data: ISetTagsItem) {
+      this.tagsList.push(data)
       console.log(this.tagsList, 'this.tagsList')
     },
     clearTags() {
@@ -71,7 +71,7 @@ export const useUserStore = defineStore({
     },
     closeCurrentTag(data: any) {
       for (let i = 0, len = this.tagsList.length; i < len; i++) {
-        const item = this.tagsList[i]
+        const item: Object = this.tagsList[i]
         if (item.path === data.$route.fullPath) {
           if (i < len - 1) {
             data.$router.push(this.tagsList[i + 1].path)

@@ -89,6 +89,34 @@ const allLayoutMap = [
         component: () => import('@/views/baseNestRouter/child/two.vue'),
         meta: { title: '测试路由Two', roles: ['admin'] },
       },
+      {
+        path: '/dashboard/baseNestRouter/menu',
+        name: '嵌套深层1',
+        component: () => import('@/views/baseNestRouter/menu/index.vue'),
+        meta: { title: '嵌套深层1-1', roles: ['admin'] },
+        children: [
+          {
+            path: '/dashboard/baseNestRouter/menu1',
+            name: 'menu1',
+            component: () => import('@/views/baseNestRouter/menu/menu1.vue'),
+            meta: { title: '嵌套深层1', roles: ['admin'] },
+          },
+          {
+            path: '/dashboard/baseNestRouter/menu2',
+            name: 'menu2',
+            component: () => import('@/views/baseNestRouter/menu/menu2.vue'),
+            meta: { title: '嵌套深层2', roles: ['admin'] },
+            children: [
+              {
+                path: '/dashboard/baseNestRouter/menu3',
+                name: 'menu3',
+                component: () => import('@/views/baseNestRouter/menu/menu3.vue'),
+                meta: { title: '嵌套深层3', roles: ['admin'] },
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ]

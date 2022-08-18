@@ -29,7 +29,8 @@
     "src/**/*.vue",
     "src/autoImports/**/*.ts",
     "**/*.ts",
-    "src/**/*.js"
+    "src/**/*.js",
+    
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

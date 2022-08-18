@@ -13,6 +13,7 @@ declare module 'vue' {
     TheFirstPage: typeof import('./../components/TheFirstPage.vue')['default']
     TheHomeNav: typeof import('./../components/TheHomeNav.vue')['default']
     TheSideBar: typeof import('./../components/TheSideBar.vue')['default']
+    TheSubItem: typeof import('./../components/TheSubItem.vue')['default']
     TheTagsView: typeof import('./../components/TheTagsView.vue')['default']
   }
 }

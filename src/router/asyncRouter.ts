@@ -11,12 +11,7 @@ const layoutMap = [
     component: () => import('@/views/baseGetDom.vue'),
     meta: { title: '获取dom元素', roles: ['admin'] },
   },
-  {
-    path: '/dashboard/basePiniaPage',
-    name: 'BasePiniaPage',
-    component: () => import('@/views/basePiniaPage.vue'),
-    meta: { title: 'Pinia' },
-  },
+
   {
     path: '/dashboard/baseFather',
     name: 'BaseFather',

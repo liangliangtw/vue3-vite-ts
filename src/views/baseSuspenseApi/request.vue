@@ -53,7 +53,7 @@ const imgRes = reactive([])
 // }
 const getImg = async (data) => {
   await axios
-    .get('https://api.thecatapi.com/v1/images/search?limit=1')
+    .get('https://tenapi.cn/lishi/')
     .then((res) => {
       imgRes.push(...res.data)
       console.log(imgRes.data, '请求图片结果')

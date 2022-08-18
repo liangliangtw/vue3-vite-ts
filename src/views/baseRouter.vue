@@ -33,6 +33,7 @@ onBeforeRouteUpdate((to, from, next) => {
   }
 })
 const onAddRouter = () => {}
+
 // 监听路由变化
 // watch(
 //   () => router.currentRoute.value.path,

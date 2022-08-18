@@ -17,12 +17,14 @@ const creatRouter = () => {
   })
 }
 let router = creatRouter()
+router.id = '新建路由'
 
 //重置路由：清空user 创建新的router store清空routes记录
 export function resetRouter(): void {
   const store = useUserStore()
   sessionStorage.setItem('user', '')
   router = creatRouter()
+  router.removeRoute('Dashboard')
   store.setAllRoutes([])
   console.log('resetRouter--store.allRoutes', store.allRoutes)
 }
@@ -30,7 +32,7 @@ export function resetRouter(): void {
 router.beforeEach((to, from, next) => {
   const store = useUserStore()
   if (to.path === '/login' || to.path === '') {
-    console.log('进入删除路由')
+    console.log('进入删除路由', store.allRoutes)
     // resetRouter()
     console.log('删除路由-全部路由', router.getRoutes())
     next()
@@ -61,7 +63,7 @@ router.beforeEach((to, from, next) => {
 
     router.addRoute(errorRouter) // 最后添加404路由
     store.setAllRoutes(router.getRoutes())
-    // console.log(router.getRoutes(), 'router.getRoutes()')
+    console.log(router.id, '添加路由后的实例')
     next({ ...to, replace: true })
   }
 })

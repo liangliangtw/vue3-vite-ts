@@ -19,7 +19,7 @@
             <fold />
           </el-icon>
         </div>
-        <Breadcrumb></Breadcrumb>
+        <TheBreadcrumb></TheBreadcrumb>
         <div class="toolbar">
           <el-dropdown>
             <el-icon style="margin-right: 8px; margin-top: 1px">
@@ -36,7 +36,7 @@
           <span>Ltw</span>
         </div>
       </el-header>
-      <v-tags></v-tags>
+      <TheTagsView></TheTagsView>
       <div class="mainBox-cell-view">
         <router-view />
       </div>
@@ -47,8 +47,8 @@
 <script lang="ts" setup>
 // import homeNav from '@/components/TheHomeNav.vue'
 // import sideBar from '@/components/TheSideBar.vue'
-import Breadcrumb from '@/components/TheBreadcrumb.vue'
-import vTags from '@/components/TheTagsView.vue'
+// import Breadcrumb from '@/components/TheBreadcrumb.vue'
+// import vTags from '@/components/TheTagsView.vue'
 import { resetRouter } from '@/router'
 
 import { useUserStore } from '@/store/user'
