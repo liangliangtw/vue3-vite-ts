@@ -1,9 +1,12 @@
 <template>
-  <el-button type="primary" @click="changeState">监听值翻倍</el-button>
-  监听新值:{{ state }}
+  <div class="content-box">
+    <el-button type="primary" @click="changeState">监听值翻倍</el-button>
+    监听新值:{{ state }}
+    <el-input v-model="input" placeholder="测试缓存" />
+  </div>
 </template>
 
-<script setup>
+<script lang="ts" setup name="BaseWatchApi">
 import { imageProps } from 'element-plus'
 import { reactive, ref, toRefs, watch } from 'vue'
 const state = ref(1)
@@ -18,6 +21,7 @@ const changeState = () => {
   numbers.push(5)
   console.log(state.value, 'state')
 }
+const input = ref('')
 // // 侦听一个 getter
 // watch(
 //   () => stateObj.name,

@@ -4,7 +4,7 @@
       <the-side-bar :is-collapse="isCollapse"></the-side-bar>
     </el-scrollbar>
 
-    <el-main class="mainBox">
+    <el-container class="mainBox">
       <el-header>
         <div class="asideCollapse">
           <el-icon
@@ -37,35 +37,45 @@
         </div>
       </el-header>
       <TheTagsView></TheTagsView>
-      <div class="mainBox-cell-view">
-        <router-view />
-      </div>
-    </el-main>
+      <el-main class="mainBox-cell-view">
+        <section class="main-box">
+          <router-view v-slot="{ Component, route }">
+            <transition appear name="fade-transform" mode="out-in">
+              <keep-alive :include="caches">
+                <component :is="Component" :key="route.path"></component>
+              </keep-alive>
+            </transition>
+          </router-view>
+        </section>
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Dashboard">
 // import homeNav from '@/components/TheHomeNav.vue'
 // import sideBar from '@/components/TheSideBar.vue'
 // import Breadcrumb from '@/components/TheBreadcrumb.vue'
 // import vTags from '@/components/TheTagsView.vue'
 import { resetRouter } from '@/router'
-
 import { useUserStore } from '@/store/user'
+
+import { findRouterWith, getCachesByRoutes } from '@/utils/processRouter'
+import { allLayoutMap } from '@/router/allRouter'
 const store = useUserStore()
 const router = useRouter()
-const route = useRoute()
 
 const menuList = reactive([])
 // menuList = router.options.routes
 
 const defaultActive = ref()
 const isCollapse = ref(false)
-
 const LogOut = () => {
   resetRouter()
   router.push('/login')
 }
+const target = findRouterWith('Dashboard')(allLayoutMap)
+const caches = getCachesByRoutes(target)
 </script>
 
 <style scoped>
@@ -87,7 +97,6 @@ const LogOut = () => {
 }
 .mainBox-cell-view {
   height: 100%;
-
   overflow: auto;
 }
 .layout-container-demo .el-aside {
@@ -101,8 +110,21 @@ const LogOut = () => {
   border-right: none;
 }
 .layout-container-demo .el-main {
-  padding: 0;
-  overflow: hidden;
+  box-sizing: border-box;
+  padding: 10px 13px;
+  overflow-x: hidden;
+  background: #f0f2f5;
+}
+.el-container .el-main .main-box {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
 .layout-container-demo .toolbar {
   position: absolute;

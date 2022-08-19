@@ -3,6 +3,8 @@
     <input v-model="state.account" type="text" placeholder="user" />
     <input v-model="state.password" type="text" placeholder="password" />
     <button @click="handleLogin()">Login</button>
+    <button @click="onAdministrator">管理员登录</button>
+    <button @click="onTourist">游客登录</button>
   </div>
 </template>
 
@@ -21,6 +23,14 @@ const handleLogin = () => {
   } else {
     alert('无措')
   }
+}
+const onAdministrator = () => {
+  sessionStorage.setItem('user', 123456)
+  router.push('/dashboard')
+}
+const onTourist = () => {
+  sessionStorage.setItem('user', 1)
+  router.push('/dashboard')
 }
 </script>
 <style scoped>

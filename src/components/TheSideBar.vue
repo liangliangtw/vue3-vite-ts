@@ -43,9 +43,7 @@
 // import { onMounted, reactive, ref, toRefs, watch } from 'vue'
 // import { useRouter, useRoute } from 'vue-router'
 import avatarSrc from '@/assets/avatar.png'
-import { baseRouter } from '@/router/baseRouter'
 import { allLayoutMap } from '@/router/allRouter'
-
 import { useUserStore } from '@/store/user'
 import { storeToRefs } from 'pinia'
 import { RouteLocationRaw } from 'vue-router'
@@ -59,7 +57,6 @@ const prosData = defineProps({
 const store = useUserStore()
 // 获取路由器实例
 const router = useRouter()
-console.log(router, 'router')
 // const route = useRoute()
 
 // const routerList = store.allRoutes
@@ -72,13 +69,10 @@ routerList.forEach((item: any) => {
   }
 })
 
-console.log(routerMap, 'routerMap')
 const defaultActive = ref()
 // menuList = router.options.routes
 
-const cloneBaseList = JSON.parse(JSON.stringify(baseRouter))
-const cloneAllLayoutMap = JSON.parse(JSON.stringify(allLayoutMap))
-cloneBaseList[0].children = [...cloneBaseList[0].children, ...cloneAllLayoutMap]
+// 拼接完整路由
 const menuMap = (list: any[]) => {
   // 过滤不存在的路由
   const filterList = list.filter((item: { name: string; children: any }) => {
@@ -89,12 +83,12 @@ const menuMap = (list: any[]) => {
       return item
     }
   })
-  console.log(filterList, 'filterList')
+  // console.log(filterList, 'filterList')
   return filterList
 }
-const menuList = menuMap(cloneBaseList)
-
+const menuList = menuMap(allLayoutMap)
 // menuMap(cloneBaseList)
+// console.log(menuList, 'menuList')
 
 const toPath = (path: RouteLocationRaw) => {
   console.log(path, 'path')

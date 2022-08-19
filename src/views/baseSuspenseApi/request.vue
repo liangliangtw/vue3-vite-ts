@@ -1,4 +1,6 @@
-<template>请求:{{ imgRes }}</template>
+<template>
+  <div class="content-box">请求:{{ imgRes }}</div>
+</template>
 
 <script setup>
 import { onMounted, reactive, ref, toRefs } from 'vue'

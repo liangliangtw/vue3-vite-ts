@@ -12,6 +12,7 @@ declare module 'vue' {
     TheCreateMtyCard: typeof import('./../components/TheCreateMtyCard.vue')['default']
     TheFirstPage: typeof import('./../components/TheFirstPage.vue')['default']
     TheHomeNav: typeof import('./../components/TheHomeNav.vue')['default']
+    TheNestRouterView: typeof import('./../components/TheNestRouterView.vue')['default']
     TheSideBar: typeof import('./../components/TheSideBar.vue')['default']
     TheSubItem: typeof import('./../components/TheSubItem.vue')['default']
     TheTagsView: typeof import('./../components/TheTagsView.vue')['default']

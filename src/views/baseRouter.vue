@@ -1,10 +1,12 @@
 <template>
-  <h1>组件路由</h1>
-  <p>路由实例:{{ useRouter }}</p>
-  <p>路由元对象:{{ route }}</p>
-  <el-button type="primary" @click="onPush">跳转</el-button>
-  <p>名字:{{ name }}</p>
-  <el-button type="primary" @click="onAddRouter">动态添加路由</el-button>
+  <div class="content-box">
+    <h1>组件路由</h1>
+    <p>路由实例:{{ useRouter }}</p>
+    <p>路由元对象:{{ route }}</p>
+    <el-button type="primary" @click="onPush">跳转</el-button>
+    <p>名字:{{ name }}</p>
+    <el-button type="primary" @click="onAddRouter">动态添加路由</el-button>
+  </div>
 </template>
 
 <script setup>

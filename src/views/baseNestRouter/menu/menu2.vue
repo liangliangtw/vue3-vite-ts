@@ -1,9 +1,8 @@
 <template>
-  我是menu2
-  <router-view />
+  <div class="content-box"></div>
 </template>
 
-<script setup>
+<script lang="ts" setup name="menu2">
 import { reactive, ref, toRefs } from 'vue'
 
 const state = reactive({})

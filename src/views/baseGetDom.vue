@@ -1,8 +1,10 @@
 <template>
-  <h1 ref="dom">获取dom元素</h1>
+  <div class="content-box">
+    <h1 ref="dom">获取dom元素</h1>
+  </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { onMounted, reactive, ref, toRefs } from 'vue'
 
 const dom = ref(null)

@@ -1,6 +1,10 @@
-<template>嵌套two</template>
+<template>
+  <div class="content-box">
+    <el-input v-model="input" placeholder="测试缓存" />
+  </div>
+</template>
 
-<script setup>
-import { reactive, ref, toRefs } from "vue";
+<script lang="ts" setup name="Two">
+const input = ref('')
 </script>
 <style scoped></style>

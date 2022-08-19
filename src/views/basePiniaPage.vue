@@ -1,22 +1,24 @@
 <template>
-  <h1>获取pinia的值:{{ store.count }}</h1>
-  <h2>
-    <p>pinia的个人信息:</p>
-    <p>名字:{{ store.userInfo.name }}</p>
-    <p>年龄:{{ store.userInfo.age }}</p>
-    <p>性别:{{ store.sex }}</p>
-    <p>电话:{{ store.phone }}</p>
-    <p>日期:{{ date }}</p>
-  </h2>
-  <el-button @click="onActionsClick">通过actions用户信息</el-button>
-  <el-button @click="onStoreClick">通过store直接修改用户信息</el-button>
-  <el-button @click="onPatchClick">通过$patch修改多个值</el-button>
-  <el-button @click="onReplaceClick">替换整个state</el-button>
-  <el-button @click="onResetClick">重置state</el-button>
-  <el-button @click="onShowPhone">actions之间互相调用</el-button>
-  <!--  获取 getter -->
-  <p>获取getter1:{{ store.doubleCount }} | 获取getter2:{{ store.tripleCount }}</p>
-  <p>computed获取:{{ computedVal }}</p>
+  <div class="content-box">
+    <h1>获取pinia的值:{{ store.count }}</h1>
+    <h2>
+      <p>pinia的个人信息:</p>
+      <p>名字:{{ store.userInfo.name }}</p>
+      <p>年龄:{{ store.userInfo.age }}</p>
+      <p>性别:{{ store.sex }}</p>
+      <p>电话:{{ store.phone }}</p>
+      <p>日期:{{ date }}</p>
+    </h2>
+    <el-button @click="onActionsClick">通过actions用户信息</el-button>
+    <el-button @click="onStoreClick">通过store直接修改用户信息</el-button>
+    <el-button @click="onPatchClick">通过$patch修改多个值</el-button>
+    <el-button @click="onReplaceClick">替换整个state</el-button>
+    <el-button @click="onResetClick">重置state</el-button>
+    <el-button @click="onShowPhone">actions之间互相调用</el-button>
+    <!--  获取 getter -->
+    <p>获取getter1:{{ store.doubleCount }} | 获取getter2:{{ store.tripleCount }}</p>
+    <p>computed获取:{{ computedVal }}</p>
+  </div>
 </template>
 
 <script setup>

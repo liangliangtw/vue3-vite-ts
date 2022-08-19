@@ -1,16 +1,18 @@
 <template>
-  <h1>使用v-bind改变css样式</h1>
+  <div class="content-box">
+    <h1>使用v-bind改变css样式</h1>
+  </div>
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs } from 'vue'
 const state = reactive({
-  color: "pink",
-});
+  color: 'pink',
+})
 </script>
 <style scoped>
 h1 {
   /* 使用v-bind绑定state中的变量 */
-  color: v-bind("state.color");
+  color: v-bind('state.color');
 }
 </style>

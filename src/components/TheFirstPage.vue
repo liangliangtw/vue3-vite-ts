@@ -1,28 +1,30 @@
 <template>
-  <h1>这是第一个测试界面</h1>
-  <p>这是年龄{{ age }}</p>
   <div>
-    {{ testTestName }}
-    {{ phone }}
-    {{ sex }}
-    {{ testObj.uu }}
-    {{ noValue }}
+    <h1>这是第一个测试界面</h1>
+    <p>这是年龄{{ age }}</p>
+    <div>
+      {{ testTestName }}
+      {{ phone }}
+      {{ sex }}
+      {{ testObj.uu }}
+      <!-- {{ noValue }} -->
+    </div>
+    <el-button type="primary" @click="add">加一</el-button>
+    <p>双倍{{ doubleCount }}</p>
+    <p>测试不用toRefs名字:{{ noTorefs.testName }}年龄:{{ noTorefs.testAge }}</p>
+    <el-button type="primary" @click="changeName">直接修改string内容</el-button>
+    <p>测试修改string内容:{{ testName }}</p>
+    <div>
+      <p style="display: flex; flex-direction: column; justify-content: center">
+        生命周期:
+        <img src="@/assets/lifeCycle.png" alt="" style="width: 500px" />
+      </p>
+    </div>
+    <el-button type="primary" @click="open">提示</el-button>
+    <el-button type="primary" @click="onTestToRefs">测试toRefs</el-button>
+    <!-- {{ test1 }} -->
+    <el-button plain @click="open1"> Success </el-button>
   </div>
-  <el-button type="primary" @click="add">加一</el-button>
-  <p>双倍{{ doubleCount }}</p>
-  <p>测试不用toRefs名字:{{ noTorefs.testName }}年龄:{{ noTorefs.testAge }}</p>
-  <el-button type="primary" @click="changeName">直接修改string内容</el-button>
-  <p>测试修改string内容:{{ testName }}</p>
-  <div>
-    <p style="display: flex; flex-direction: column; justify-content: center">
-      生命周期:
-      <img src="@/assets/lifeCycle.png" alt="" style="width: 500px" />
-    </p>
-  </div>
-  <el-button type="primary" @click="open">提示</el-button>
-  <el-button type="primary" @click="onTestToRefs">测试toRefs</el-button>
-  <!-- {{ test1 }} -->
-  <el-button plain @click="open1"> Success </el-button>
 </template>
 
 <script setup>
@@ -44,7 +46,7 @@ const testAxios = async () => {
 }
 testAxios()
 
-const noValue = $ref(1)
+// const noValue = $ref(1)
 /**
 ref和toRef区别:
 ref->复制, 修改响应式数据不会影响原始数据
@@ -103,7 +105,7 @@ setTimeout(() => {
   // console.log(testObj.value.uu, 'testObj')
   // testObj.value.uu = '过了2秒之后'
   personObj.testObj.uu = '过了2秒之后'
-  noValue = 5
+  // noValue = 5
 }, 2000)
 
 const { testTestName, phone, sex, age, testObj } = toRefs(personObj)

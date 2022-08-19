@@ -1,16 +1,18 @@
 <template>
-  <h1>这是父组件名字:{{ fatherName }}</h1>
-  <child-page
-    ref="childRef"
-    :msg="msg"
-    :send-obj="sendObj"
-    :send-array="sendArray"
-    @updateName="updateName"
-  />
-  <p class="test">
-    父组件修改子组件暴露的方法
-    <el-button type="primary" @click="changeExpose">修改暴露子组件的信息</el-button>
-  </p>
+  <div class="content-box">
+    <h1>这是父组件名字:{{ fatherName }}</h1>
+    <child-page
+      ref="childRef"
+      :msg="msg"
+      :send-obj="sendObj"
+      :send-array="sendArray"
+      @updateName="updateName"
+    />
+    <p class="test">
+      父组件修改子组件暴露的方法
+      <el-button type="primary" @click="changeExpose">修改暴露子组件的信息</el-button>
+    </p>
+  </div>
 </template>
 
 <script setup>

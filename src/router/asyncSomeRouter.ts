@@ -1,9 +1,9 @@
-const layoutMap = [
+const asyncSomeRouterList = [
   {
     path: '/dashboard/baseWatchApi',
     name: 'BaseWatchApi',
     component: () => import('@/views/baseWatchApi.vue'),
-    meta: { title: '监听' },
+    meta: { title: '监听', keepAlive: true },
   },
   {
     path: '/dashboard/baseGetDom',
@@ -11,19 +11,13 @@ const layoutMap = [
     component: () => import('@/views/baseGetDom.vue'),
     meta: { title: '获取dom元素', roles: ['admin'] },
   },
+  {
+    path: '/dashboard/basePiniaPage',
+    name: 'BasePiniaPage',
+    component: () => import('@/views/basePiniaPage.vue'),
+    meta: { title: 'Pinia' },
+  },
 
-  {
-    path: '/dashboard/baseFather',
-    name: 'BaseFather',
-    component: () => import('@/views/baseFather/index.vue'),
-    meta: { title: '测试父子组件' },
-  },
-  {
-    path: '/dashboard/baseSlot',
-    name: 'baseSlot',
-    component: () => import('@/views/baseSlot/index.vue'),
-    meta: { title: '插槽' },
-  },
   {
     path: '/dashboard/baseVBind',
     name: 'BaseVBind',
@@ -61,10 +55,16 @@ const layoutMap = [
     meta: { title: '类型卡片' },
   },
   {
-    path: '/dashboard/baseNestRouter',
+    path: '/dashboard/vueUse',
+    name: 'VueUse',
+    component: () => import('@/views/baseVueUsePage.vue'),
+    meta: { title: 'vueUse' },
+  },
+  {
+    path: '/dashboard/BaseNestRouter',
     name: 'BaseNestRouter',
-    component: () => import('@/views/baseNestRouter/index.vue'),
-    meta: { title: '嵌套路由', roles: ['admin'] },
+    component: () => import('@/components/TheNestRouterView.vue'),
+    meta: { title: '嵌套路由', keepAlive: true, roles: ['admin'] },
     children: [
       {
         path: '/dashboard/baseNestRouter/one',
@@ -76,26 +76,10 @@ const layoutMap = [
         path: '/dashboard/baseNestRouter/two',
         name: 'Two',
         component: () => import('@/views/baseNestRouter/child/two.vue'),
-        meta: { title: '测试路由Two', roles: ['admin'] },
+        meta: { title: '测试路由Two', keepAlive: false, roles: ['admin'] },
       },
     ],
   },
 ]
-// const asyncRouter = [
-//   {
-//     path: '/dashboard',
-//     name: 'Dashboard',
-//     redirect: '/firstPage',
-//     meta: {
-//       title: '首页',
-//       icon: 'menu',
-//       breadcrumb: true,
-//       affix: true,
-//       noCache: true,
-//     },
-//     component: () => import('@/components/Dashboard.vue'),
-//     children: [...layoutMap],
-//   },
-// ]
-// asyncRouter
-export { layoutMap }
+
+export { asyncSomeRouterList }

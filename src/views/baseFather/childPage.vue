@@ -1,20 +1,22 @@
 <template>
-  <h1>这里是子组件</h1>
-  <div>
-    父组件传入的string:
-    <div style="color: pink">{{ msg }}</div>
-    <p>prosData.msg此种写法也可以获取: {{ prosData.msg }}</p>
+  <div class="content-box">
+    <h1>这里是子组件</h1>
+    <div>
+      父组件传入的string:
+      <div style="color: pink">{{ msg }}</div>
+      <p>prosData.msg此种写法也可以获取: {{ prosData.msg }}</p>
+    </div>
+    <div>
+      父组件传入的Obj:
+      <span style="color: pink">{{ sendObj }}</span>
+    </div>
+    <div>
+      父组件传入的Array:
+      <span style="color: pink">{{ sendArray }}</span>
+    </div>
+    <el-button type="primary" @click="changeName">修改父组件名字</el-button>
+    <p>显示子组件暴露的信息:{{ exposeNameObj.name }}</p>
   </div>
-  <div>
-    父组件传入的Obj:
-    <span style="color: pink">{{ sendObj }}</span>
-  </div>
-  <div>
-    父组件传入的Array:
-    <span style="color: pink">{{ sendArray }}</span>
-  </div>
-  <el-button type="primary" @click="changeName">修改父组件名字</el-button>
-  <p>显示子组件暴露的信息:{{ exposeNameObj.name }}</p>
 </template>
 
 <script setup>

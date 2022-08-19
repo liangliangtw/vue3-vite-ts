@@ -1,13 +1,15 @@
 <template>
-  来点什么表示下吧,其实它已经挂载到app那去了
-  <teleport to="#modal">
-    <div id="modalBox">Look Me!!!</div>
-    <!-- <h1>Hello Modal</h1> -->
-  </teleport>
+  <div class="content-box">
+    来点什么表示下吧,其实它已经挂载到app那去了
+    <teleport to="#modal">
+      <div id="modalBox">Look Me!!!</div>
+      <!-- <h1>Hello Modal</h1> -->
+    </teleport>
+  </div>
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs } from 'vue'
 </script>
 <style scoped>
 #modalBox {
