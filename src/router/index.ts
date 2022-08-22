@@ -1,21 +1,24 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
+import { allLayoutMap } from './allRouter'
 import { asyncAllRouterList } from './asyncAllRouter'
 import { asyncSomeRouterList } from './asyncSomeRouter'
 import { baseRouter, errorRouter } from './baseRouter'
 import { useUserStore } from '@/store/user'
 // import { storeToRefs } from 'pinia'
-import { filterAsyncRouter } from '@/untils/tool'
 // let accessedRouters = filterAsyncRouter(routes, 'admin');
 
 import baseWatchApiComponent from '@/views/baseWatchApi.vue'
+
 const creatRouter = () => {
   return createRouter({
     history: createWebHistory(),
     routes: baseRouter,
+    // routes: allLayoutMap,
   })
 }
 const router = creatRouter()
+console.log(router, 'router')
+
 //重置路由：清空user 创建新的router store清空routes记录
 export function resetRouter(): void {
   const store = useUserStore()
@@ -59,7 +62,7 @@ router.beforeEach((to, from, next) => {
 
     router.addRoute(errorRouter) // 最后添加404路由
     store.setAllRoutes(router.getRoutes())
-    // console.log(router.id, '添加路由后的实例')
+
     next({ ...to, replace: true })
   }
 })

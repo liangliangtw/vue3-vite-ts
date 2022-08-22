@@ -59,22 +59,25 @@
 // import vTags from '@/components/TheTagsView.vue'
 import { resetRouter } from '@/router'
 import { useUserStore } from '@/store/user'
-
-import { findRouterWith, getCachesByRoutes } from '@/utils/processRouter'
 import { allLayoutMap } from '@/router/allRouter'
+import { findRouterWith, getCachesByRoutes } from '@/utils/processRouter'
 const store = useUserStore()
 const router = useRouter()
 
 const menuList = reactive([])
 // menuList = router.options.routes
-
 const defaultActive = ref()
 const isCollapse = ref(false)
 const LogOut = () => {
   resetRouter()
+  // 清除tagView缓存
+  store.tagsList = []
   router.push('/login')
 }
+console.log(allLayoutMap, '1allLayoutMap')
 const target = findRouterWith('Dashboard')(allLayoutMap)
+console.log(allLayoutMap, '2allLayoutMap')
+
 const caches = getCachesByRoutes(target)
 </script>
 

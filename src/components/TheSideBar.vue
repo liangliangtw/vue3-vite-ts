@@ -61,8 +61,7 @@ const router = useRouter()
 
 // const routerList = store.allRoutes
 const routerList = router.getRoutes()
-console.log(routerList, '回显')
-const routerMap = ['Dashboard']
+const routerMap: string[] = []
 routerList.forEach((item: any) => {
   if (item.name) {
     routerMap.push(item.name)
@@ -74,8 +73,9 @@ const defaultActive = ref()
 
 // 拼接完整路由
 const menuMap = (list: any[]) => {
+  const cloneAllRouterList = JSON.parse(JSON.stringify(list))
   // 过滤不存在的路由
-  const filterList = list.filter((item: { name: string; children: any }) => {
+  const filterList = cloneAllRouterList.filter((item: { name: string; children: any }) => {
     if (routerMap.includes(item.name)) {
       if (item.children) {
         item.children = menuMap(item.children)
@@ -83,15 +83,11 @@ const menuMap = (list: any[]) => {
       return item
     }
   })
-  // console.log(filterList, 'filterList')
   return filterList
 }
+// const menuList = publicRouterList
 const menuList = menuMap(allLayoutMap)
-// menuMap(cloneBaseList)
-// console.log(menuList, 'menuList')
-
 const toPath = (path: RouteLocationRaw) => {
-  console.log(path, 'path')
   router.replace(path)
 }
 watch(

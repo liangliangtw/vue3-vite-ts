@@ -91,10 +91,10 @@ const allLayoutMap = [
         meta: { title: 'vueUse' },
       },
       {
-        path: '',
+        path: '/dashboard/BaseNestRouter',
         name: 'BaseNestRouter',
         component: () => import('@/components/TheNestRouterView.vue'),
-        meta: { title: '嵌套路由', keepAlive: true, roles: ['admin'] },
+        meta: { title: '嵌套路由', roles: ['admin'] },
         children: [
           {
             path: '/dashboard/baseNestRouter/one',
@@ -106,10 +106,10 @@ const allLayoutMap = [
             path: '/dashboard/baseNestRouter/two',
             name: 'Two',
             component: () => import('@/views/baseNestRouter/child/two.vue'),
-            meta: { title: '测试路由Two', keepAlive: false, roles: ['admin'] },
+            meta: { title: '测试路由Two', keepAlive: true, roles: ['admin'] },
           },
           {
-            path: '',
+            path: '/dashboard/baseNestRouter/menu',
             name: '嵌套深层1',
             component: () => import('@/components/TheNestRouterView.vue'),
             meta: { title: '嵌套深层1-1', roles: ['admin'] },
@@ -118,10 +118,10 @@ const allLayoutMap = [
                 path: '/dashboard/baseNestRouter/menu1',
                 name: 'menu1',
                 component: () => import('@/views/baseNestRouter/menu/menu1.vue'),
-                meta: { title: '嵌套深层1', keepAlive: true, roles: ['admin'] },
+                meta: { title: '嵌套深层1', keepAlive: false, roles: ['admin'] },
               },
               {
-                path: '',
+                path: '/dashboard/baseNestRouter/menu2',
                 name: 'menu2',
                 component: () => import('@/components/TheNestRouterView.vue'),
                 meta: { title: '嵌套深层2', roles: ['admin'] },

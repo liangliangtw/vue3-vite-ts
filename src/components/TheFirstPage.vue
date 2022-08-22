@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-button plain @click="LogOut"> 退出登录 </el-button>
     <h1>这是第一个测试界面</h1>
     <p>这是年龄{{ age }}</p>
     <div>
@@ -172,6 +173,15 @@ const open1 = () => {
 //   return element.name === 1
 // })
 // console.log(isExist, 'isExist')
+import { resetRouter } from '@/router'
+import { useUserStore } from '@/store/user'
+const store = useUserStore()
+const LogOut = () => {
+  resetRouter()
+  // 清除tagView缓存
+  store.tagsList = []
+  router.push('/login')
+}
 </script>
 
 <style scoped>

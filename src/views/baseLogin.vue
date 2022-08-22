@@ -10,6 +10,7 @@
 
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
+import { allLayoutMap } from '@/router/allRouter'
 const router = useRouter()
 const route = useRoute()
 const state = reactive({
@@ -32,6 +33,7 @@ const onTourist = () => {
   sessionStorage.setItem('user', 1)
   router.push('/dashboard')
 }
+console.log(allLayoutMap[0], '登录页allLayoutMap')
 </script>
 <style scoped>
 .user {
