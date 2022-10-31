@@ -90,6 +90,7 @@ const allLayoutMap = [
         component: () => import('@/views/baseVueUsePage.vue'),
         meta: { title: 'vueUse' },
       },
+
       {
         path: '/dashboard/BaseNestRouter',
         name: 'BaseNestRouter',
